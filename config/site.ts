@@ -31,6 +31,7 @@ export const siteConfig = {
     github: "https://github.com/Uanderson777/uanderson777.github.io",
     youtube: "https://www.youtube.com/@andersonmartins4037/videos",
     instagram: "https://www.instagram.com/anderson_martinsmoraes/",
+    https://web.dio.me/users/andubryanrj/?tab=achievements
     // Número real, em formato E.164 (só dígitos, com código do país) —
     // usado para montar o link https://wa.me/... nos componentes.
     whatsapp: "5521992444504", // +55 21 99244-4504

@@ -63,6 +63,11 @@ export function Footer() {
                 <a href={siteConfig.social.instagram} className="hover:text-signal-600">
                   Instagram
                 </a>
+              )}   
+              {siteConfig.social.dio && !siteConfig.social.dio.startsWith("COLOCAR") && (
+                <a href={siteConfig.social.dio} className="hover:text-signal-600">
+                   DIO
+                 </a>
               )}
               {siteConfig.social.whatsapp && !siteConfig.social.whatsapp.startsWith("COLOCAR") && (
                 <a href={`https://wa.me/${siteConfig.social.whatsapp}`} className="hover:text-signal-600">

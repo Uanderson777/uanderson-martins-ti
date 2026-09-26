@@ -62,7 +62,7 @@ export default function HomePage() {
             <p className="mt-3 text-stream-400">$ trilha --iniciar service-desk</p>
             <p className="mt-1 text-paper-200/60">→ incidentes, SLA, N1 → N2 → N3</p>
             <p className="mt-3 text-signal-400">
-              status: em construção contínua<span className="animate-blink">_</span>
+             status: em evolução contínua<span className="animate-blink">_</span>
             </p>
           </div>
         </div>

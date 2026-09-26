@@ -1,0 +1,71 @@
+---
+title: "O que é análise de dados?"
+slug: "o-que-e-analise-de-dados"
+summary: "O que faz um analista de dados, a diferença entre dados estruturados e não estruturados, e as etapas básicas de uma análise."
+category: "dados"
+tags: ["dados", "iniciante"]
+level: "iniciante"
+date: "2026-02-20"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Análise de dados é o processo de examinar, organizar e interpretar dados para extrair informações úteis que
+apoiem decisões — desde entender por que as vendas caíram em um mês, até identificar os tipos de chamado mais
+comuns em um Service Desk.
+
+## Dados estruturados x não estruturados
+
+- **Dados estruturados** — organizados em formato de tabela, com colunas e tipos bem definidos (ex.: uma planilha,
+  ou uma tabela de um [banco de dados](/artigos/o-que-e-um-banco-de-dados)).
+- **Dados não estruturados** — sem um formato fixo, como texto livre, imagens, áudios ou e-mails.
+
+<Callout type="info">
+A maior parte do trabalho de análise de dados no dia a dia lida com dados estruturados — é por isso que SQL
+aparece com tanta frequência na rotina de quem trabalha com dados.
+</Callout>
+
+## As etapas básicas de uma análise
+
+```
+1. Coletar os dados (de um banco, uma planilha, uma API)
+2. Limpar os dados (remover duplicatas, corrigir valores inconsistentes)
+3. Explorar os dados (entender padrões, distribuições, valores fora do comum)
+4. Analisar (responder a uma pergunta específica com os dados)
+5. Comunicar (apresentar o resultado de forma clara, geralmente com gráficos)
+```
+
+## Um exemplo prático, no contexto de Service Desk
+
+Imagine que você quer entender por que o tempo médio de resolução (MTTR) aumentou no último mês:
+
+1. **Coleta** — exportar os chamados do último trimestre do sistema de Service Desk.
+2. **Limpeza** — remover chamados de teste ou duplicados, corrigir categorias preenchidas de forma inconsistente.
+3. **Exploração** — comparar o MTTR por categoria, por prioridade e por analista responsável.
+4. **Análise** — descobrir, por exemplo, que chamados de uma categoria específica (ex.: "acesso a sistemas")
+   aumentaram muito em volume e estão puxando a média para cima.
+5. **Comunicação** — apresentar um gráfico simples mostrando essa categoria isolada das demais.
+
+## Ferramentas comuns para análise de dados
+
+- **SQL** — para consultar dados diretamente de bancos de dados.
+- **Python (com Pandas e NumPy)** — para limpeza, transformação e análise mais flexível (veja o próximo artigo
+  desta trilha).
+- **Planilhas** — ainda muito usadas para análises rápidas e pequenas.
+- **Ferramentas de BI** (Business Intelligence) — para criar dashboards e relatórios visuais recorrentes.
+
+## Perguntas frequentes
+
+**Preciso saber programar para trabalhar com dados?**
+Não obrigatoriamente no início — SQL e planilhas já resolvem muita coisa. Python amplia bastante o que é possível
+fazer, especialmente em análises mais complexas ou repetitivas.
+
+**Análise de dados e Inteligência Artificial são a mesma coisa?**
+Não. Análise de dados foca em entender o que já aconteceu; IA (veremos na próxima trilha) frequentemente foca em
+prever ou automatizar decisões a partir de padrões nos dados.
+
+## Resumo
+
+Análise de dados transforma dados brutos em informação útil, seguindo etapas de coleta, limpeza, exploração,
+análise e comunicação. SQL, Python e ferramentas de BI são os pilares práticos mais comuns dessa área — e SQL, que
+você já viu na trilha anterior, é frequentemente o primeiro passo.

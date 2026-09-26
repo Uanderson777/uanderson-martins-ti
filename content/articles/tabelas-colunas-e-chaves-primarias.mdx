@@ -1,0 +1,97 @@
+---
+title: "Tabelas, colunas e chaves primárias"
+slug: "tabelas-colunas-e-chaves-primarias"
+summary: "Como criar tabelas em SQL com CREATE TABLE, definir tipos de coluna e escolher uma chave primária correta."
+category: "sql"
+tags: ["sql", "banco-de-dados", "iniciante"]
+level: "iniciante"
+date: "2026-02-08"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Depois de entender [o que é um banco de dados](/artigos/o-que-e-um-banco-de-dados) na teoria, este artigo mostra
+como criar uma tabela de verdade com SQL, definindo colunas, tipos de dado e a chave primária.
+
+## Criando uma tabela
+
+```sql
+CREATE TABLE chamados (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200) NOT NULL,
+    prioridade VARCHAR(20) DEFAULT 'media',
+    status VARCHAR(20) DEFAULT 'aberto',
+    data_abertura DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## Os tipos de coluna mais comuns
+
+| Tipo | Uso |
+|---|---|
+| `INT` | Números inteiros |
+| `VARCHAR(n)` | Texto com tamanho máximo definido (`n` caracteres) |
+| `TEXT` | Texto longo, sem limite prático de tamanho |
+| `DATETIME` / `DATE` | Data e hora, ou apenas data |
+| `BOOLEAN` | Verdadeiro ou falso |
+| `DECIMAL(p, s)` | Números decimais precisos (ex.: valores monetários) |
+
+<Callout type="atencao">
+Para valores monetários, prefira `DECIMAL` a `FLOAT`. Números de ponto flutuante podem gerar pequenos erros de
+arredondamento — indesejáveis quando o assunto é dinheiro.
+</Callout>
+
+## Chave primária: identificando cada registro
+
+```sql
+id INT PRIMARY KEY AUTO_INCREMENT
+```
+
+- `PRIMARY KEY` marca essa coluna como o identificador único de cada linha — nenhum outro registro pode ter o
+  mesmo valor de `id`.
+- `AUTO_INCREMENT` faz o banco gerar automaticamente o próximo número disponível a cada novo registro, sem você
+  precisar controlar isso manualmente.
+
+## Restrições (constraints) comuns
+
+```sql
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    nome VARCHAR(100) NOT NULL
+);
+```
+
+- `NOT NULL` — a coluna é obrigatória, não pode ficar vazia.
+- `UNIQUE` — o valor não pode se repetir entre registros (ex.: dois usuários não podem ter o mesmo e-mail).
+- `DEFAULT` — valor usado automaticamente quando nenhum é informado.
+
+## Chave estrangeira: conectando tabelas
+
+```sql
+CREATE TABLE chamados (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200) NOT NULL,
+    usuario_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+```
+
+`FOREIGN KEY` garante que `usuario_id` só possa conter valores que realmente existem na tabela `usuarios` — é essa
+restrição que sustenta os [JOINs](/artigos/joins-inner-left-right) vistos mais adiante.
+
+## Perguntas frequentes
+
+**Toda tabela precisa de uma chave primária?**
+Na prática, sim. Sem uma chave primária, fica difícil identificar, atualizar ou relacionar registros de forma
+confiável.
+
+**Posso usar mais de uma coluna como chave primária?**
+Sim — isso se chama chave primária composta, útil quando a identidade única de um registro depende da combinação
+de duas colunas. É menos comum no dia a dia inicial, mas existe.
+
+## Resumo
+
+`CREATE TABLE` define a estrutura de uma tabela: colunas, tipos de dado e restrições. A chave primária identifica
+cada registro de forma única, geralmente com `AUTO_INCREMENT`; a chave estrangeira conecta tabelas entre si,
+garantindo que os relacionamentos do banco façam sentido.

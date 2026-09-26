@@ -1,0 +1,78 @@
+---
+title: "O que são LLMs?"
+slug: "o-que-sao-llms"
+summary: "O que é um Large Language Model, como ele funciona em linhas gerais, o conceito de token e contexto, e onde LLMs são usados na prática."
+category: "inteligencia-artificial"
+tags: ["ia", "llm", "iniciante"]
+level: "iniciante"
+date: "2026-02-25"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+LLM (Large Language Model, ou Modelo de Linguagem de Grande Escala) é um tipo de modelo de IA treinado em enormes
+volumes de texto, capaz de entender e gerar linguagem natural — responder perguntas, resumir textos, traduzir,
+escrever código e muito mais.
+
+## Como um LLM "aprende" a gerar texto
+
+De forma simplificada, um LLM é treinado prevendo qual é a próxima palavra (ou parte de palavra) mais provável em
+uma sequência de texto, repetindo isso bilhões de vezes sobre um volume enorme de dados. Com o tempo, esse
+processo faz o modelo "aprender" padrões de linguagem, fatos, estilos de escrita e até raciocínio lógico básico.
+
+```
+Entrada: "O céu é da cor"
+Modelo prevê a próxima palavra mais provável: "azul"
+```
+
+Isso se repete palavra por palavra até formar uma resposta completa.
+
+## Tokens: a unidade que um LLM realmente processa
+
+Um LLM não lê "palavras" da forma como nós entendemos — ele processa **tokens**, que podem ser palavras inteiras,
+partes de palavras, ou até pontuação.
+
+```
+"Programação" pode virar os tokens: "Program" + "ação"
+```
+
+<Callout type="info">
+O custo e o limite de uso de APIs de IA costumam ser medidos em tokens, não em palavras ou caracteres — por isso
+esse conceito aparece com frequência em documentações de ferramentas de IA.
+</Callout>
+
+## Contexto: o que o modelo "enxerga" de uma vez
+
+O **contexto** (ou "janela de contexto") é a quantidade de texto que um LLM consegue considerar de uma vez ao
+gerar uma resposta — incluindo a pergunta atual e, em uma conversa, as mensagens anteriores. Se uma conversa fica
+muito longa, informações do início podem "sair" da janela de contexto e deixar de influenciar a resposta.
+
+## O que um LLM sabe (e o que ele não sabe)
+
+- Um LLM é treinado com dados até uma certa data — ele não tem conhecimento automático de eventos depois disso, a
+  menos que receba essa informação como parte do contexto (por exemplo, através de uma busca na web).
+- Um LLM pode **"alucinar"** — gerar informação que parece plausível, mas é incorreta ou inventada. Por isso,
+  verificar informações importantes geradas por um LLM continua sendo essencial.
+
+## Onde LLMs aparecem na prática
+
+- Assistentes de escrita e programação (como o Claude, usado neste próprio site).
+- Chatbots de atendimento e suporte técnico.
+- Resumo automático de documentos e transcrições.
+- Geração de código, testes e documentação técnica.
+
+## Perguntas frequentes
+
+**LLM e IA generativa são a mesma coisa?**
+LLM é um **tipo** de IA generativa, especificamente para texto. IA generativa também inclui modelos para imagem,
+áudio e vídeo.
+
+**Um LLM "pensa" de verdade?**
+Não da forma como um humano pensa — ele gera texto com base em padrões estatísticos aprendidos durante o
+treinamento, sem compreensão consciente do conteúdo, mesmo que o resultado muitas vezes pareça bastante coerente.
+
+## Resumo
+
+LLMs são modelos treinados para prever e gerar texto, processando a linguagem em unidades chamadas tokens, dentro
+de uma janela de contexto limitada. Eles são a base de assistentes de IA modernos, mas têm limitações importantes
+— como a possibilidade de "alucinar" informações incorretas — que valem a pena ter em mente ao usá-los.

@@ -1,0 +1,115 @@
+---
+title: "Python para dados: Pandas e NumPy"
+slug: "python-para-dados-pandas-e-numpy"
+summary: "Introdução prática ao Pandas e NumPy: DataFrames, filtragem, agregações e as operações mais comuns em análise de dados com Python."
+category: "dados"
+tags: ["dados", "python", "pandas", "numpy", "basico"]
+level: "basico"
+date: "2026-02-21"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do Pandas"
+    url: "https://pandas.pydata.org/docs/"
+  - label: "Documentação oficial do NumPy"
+    url: "https://numpy.org/doc/"
+---
+
+Pandas e NumPy são as duas bibliotecas mais usadas para análise de dados em Python. Este artigo assume que você já
+conhece o básico de [Python](/python) e foca no uso prático dessas bibliotecas.
+
+## Instalação
+
+```bash
+pip install pandas numpy
+```
+
+## NumPy: cálculo numérico eficiente
+
+NumPy trabalha com **arrays** — estruturas otimizadas para operações matemáticas em grandes volumes de números,
+muito mais rápidas do que listas Python comuns para esse tipo de cálculo.
+
+```python
+import numpy as np
+
+tempos_resolucao = np.array([2.5, 4.0, 1.2, 8.5, 3.0])
+
+print(tempos_resolucao.mean())   # média
+print(tempos_resolucao.max())    # maior valor
+print(tempos_resolucao * 60)     # multiplica cada valor por 60 (ex.: horas para minutos)
+```
+
+A última linha mostra uma vantagem central do NumPy: operações aplicadas a **todo o array de uma vez**, sem
+precisar escrever um loop manual.
+
+## Pandas: tabelas de dados em Python
+
+Pandas organiza dados em um **DataFrame** — uma estrutura parecida com uma planilha ou uma tabela de banco de
+dados, com linhas e colunas nomeadas.
+
+```python
+import pandas as pd
+
+chamados = pd.DataFrame({
+    "titulo": ["Wi-Fi lento", "Impressora", "Servidor fora do ar"],
+    "prioridade": ["media", "baixa", "alta"],
+    "tempo_horas": [4.0, 8.5, 1.2],
+})
+
+print(chamados)
+```
+
+## Operações básicas com DataFrames
+
+```python
+# Filtrando linhas
+alta_prioridade = chamados[chamados["prioridade"] == "alta"]
+
+# Ordenando
+chamados_ordenados = chamados.sort_values("tempo_horas", ascending=False)
+
+# Estatísticas rápidas
+print(chamados["tempo_horas"].mean())
+print(chamados["prioridade"].value_counts())
+```
+
+<Callout type="info">
+`value_counts()` conta quantas vezes cada valor aparece em uma coluna — muito útil para entender rapidamente a
+distribuição de categorias, como prioridades de chamados ou status de pedidos.
+</Callout>
+
+## Lendo dados de um arquivo CSV
+
+```python
+chamados = pd.read_csv("chamados.csv")
+print(chamados.head())  # mostra as 5 primeiras linhas
+```
+
+Na prática, é raríssimo criar um DataFrame manualmente como nos exemplos acima — o mais comum é carregar dados de
+um CSV, de uma planilha ou diretamente de uma consulta SQL.
+
+## Agrupando dados com groupby
+
+```python
+media_por_prioridade = chamados.groupby("prioridade")["tempo_horas"].mean()
+print(media_por_prioridade)
+```
+
+`groupby` é o equivalente em Pandas do `GROUP BY` em SQL: agrupa linhas por uma coluna e aplica um cálculo
+(média, soma, contagem) sobre cada grupo.
+
+## Perguntas frequentes
+
+**Preciso saber NumPy para usar Pandas?**
+Pandas é construído sobre o NumPy, então ter uma noção básica ajuda, mas você pode começar direto por Pandas na
+maioria dos casos práticos de análise de dados.
+
+**Pandas substitui o SQL?**
+Não — eles se complementam. É comum extrair dados de um banco com SQL e depois usar Pandas para análises mais
+flexíveis, específicas ou visuais.
+
+## Resumo
+
+NumPy oferece arrays otimizados para cálculo numérico; Pandas organiza dados em DataFrames, parecidos com tabelas,
+com operações de filtro, ordenação e agregação (`groupby`) muito próximas do que já se faz em SQL — só que dentro
+do próprio Python.

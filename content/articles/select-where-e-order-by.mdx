@@ -1,0 +1,100 @@
+---
+title: "SELECT, WHERE e ORDER BY"
+slug: "select-where-e-order-by"
+summary: "Como consultar dados em SQL: selecionar colunas, filtrar registros e ordenar resultados, com exemplos práticos."
+category: "sql"
+tags: ["sql", "select", "iniciante"]
+level: "iniciante"
+date: "2026-01-29"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+`SELECT` é o comando mais usado em SQL: ele busca dados de uma ou mais tabelas. Este artigo assume a tabela
+`chamados` como exemplo, com as colunas `id`, `titulo`, `prioridade` e `status`.
+
+## Selecionando colunas
+
+```sql
+-- Todas as colunas
+SELECT * FROM chamados;
+
+-- Apenas colunas específicas
+SELECT titulo, prioridade FROM chamados;
+```
+
+<Callout type="atencao">
+Usar `SELECT *` é prático para explorar dados, mas em sistemas reais é melhor listar as colunas que você
+realmente precisa — isso deixa a consulta mais rápida e o código mais claro sobre o que está sendo usado.
+</Callout>
+
+## Filtrando com WHERE
+
+```sql
+SELECT titulo, prioridade
+FROM chamados
+WHERE prioridade = 'alta';
+```
+
+`WHERE` filtra quais linhas aparecem no resultado, com base em uma condição.
+
+### Operadores comuns no WHERE
+
+```sql
+-- Comparação
+WHERE prioridade = 'alta'
+WHERE status != 'fechado'
+
+-- Intervalo
+WHERE data_abertura BETWEEN '2026-01-01' AND '2026-01-31'
+
+-- Lista de valores
+WHERE prioridade IN ('alta', 'media')
+
+-- Padrão de texto
+WHERE titulo LIKE '%impressora%'
+
+-- Combinando condições
+WHERE prioridade = 'alta' AND status = 'aberto'
+```
+
+`LIKE '%impressora%'` busca qualquer título que contenha a palavra "impressora" em qualquer posição — o `%` é um
+curinga.
+
+## Ordenando resultados com ORDER BY
+
+```sql
+SELECT titulo, prioridade
+FROM chamados
+ORDER BY prioridade DESC;
+```
+
+- `ASC` — ordem crescente (padrão, pode ser omitido).
+- `DESC` — ordem decrescente.
+
+Você também pode ordenar por mais de uma coluna:
+
+```sql
+SELECT titulo, prioridade, data_abertura
+FROM chamados
+ORDER BY prioridade DESC, data_abertura ASC;
+```
+
+Isso ordena primeiro por prioridade (da mais alta para a mais baixa) e, para chamados de mesma prioridade, ordena
+pela data de abertura (do mais antigo para o mais recente).
+
+## Limitando o número de resultados
+
+```sql
+SELECT titulo FROM chamados
+ORDER BY data_abertura DESC
+LIMIT 10;
+```
+
+Retorna apenas os 10 chamados mais recentes — muito usado para paginação e para evitar consultas pesadas.
+
+## Resumo
+
+`SELECT` escolhe quais colunas retornar, `WHERE` filtra quais linhas aparecem, e `ORDER BY` define a ordem do
+resultado. Esses três comandos, combinados, já resolvem a maior parte das consultas do dia a dia com um banco de
+dados relacional.

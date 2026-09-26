@@ -1,0 +1,87 @@
+---
+title: "Modelagem e normalização"
+slug: "modelagem-e-normalizacao"
+summary: "Como planejar as tabelas de um banco de dados antes de criá-las, e o que significa normalizar dados (1FN, 2FN, 3FN) na prática."
+category: "sql"
+tags: ["sql", "banco-de-dados", "intermediario"]
+level: "intermediario"
+date: "2026-02-10"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Modelagem de dados é o processo de planejar quais tabelas um sistema vai ter, quais colunas cada uma terá e como
+elas se relacionam — **antes** de escrever qualquer `CREATE TABLE`. Um banco mal modelado gera dados duplicados,
+inconsistentes e difíceis de manter.
+
+## Um exemplo de má modelagem
+
+```
+Tabela: chamados (tudo em uma tabela só)
++----+---------------+----------------+------------------+
+| id | titulo        | usuario_nome   | usuario_email    |
++----+---------------+----------------+------------------+
+| 1  | Wi-Fi lento   | Ana Silva      | ana@empresa.com  |
+| 2  | Impressora    | Ana Silva      | ana@empresa.com  |
++----+---------------+----------------+------------------+
+```
+
+O nome e o e-mail de Ana estão **duplicados** em cada chamado que ela abre. Se o e-mail dela mudar, é preciso
+atualizar em todas as linhas — e é fácil esquecer uma, gerando inconsistência.
+
+## A mesma modelagem, corrigida
+
+```
+Tabela: usuarios                    Tabela: chamados
++----+-----------+----------------+ +----+---------------+-------------+
+| id | nome      | email          | | id | titulo        | usuario_id  |
++----+-----------+----------------+ +----+---------------+-------------+
+| 1  | Ana Silva | ana@empresa.com| | 1  | Wi-Fi lento   | 1           |
++----+-----------+----------------+ | 2  | Impressora    | 1           |
+                                    +----+---------------+-------------+
+```
+
+Agora o nome e o e-mail existem em **um único lugar** (a tabela `usuarios`), e os chamados apenas referenciam o
+usuário pelo `usuario_id`. Isso é normalização: reduzir redundância, organizando dados relacionados em tabelas
+separadas conectadas por chaves.
+
+## Formas normais, de forma simples
+
+<Callout type="info">
+Você não precisa decorar as regras formais de cada forma normal para modelar bem no dia a dia — a intuição de
+"esse dado deveria estar duplicado aqui?" já resolve a maioria dos casos.
+</Callout>
+
+- **1FN (Primeira Forma Normal)** — cada coluna guarda um único valor (nunca uma lista dentro de uma célula).
+- **2FN (Segunda Forma Normal)** — todo dado da tabela depende da chave primária inteira, não só de parte dela.
+- **3FN (Terceira Forma Normal)** — nenhuma coluna depende de outra coluna que não seja a chave primária (como no
+  exemplo acima: `usuario_nome` e `usuario_email` dependiam do usuário, não do chamado).
+
+## Quando "quebrar as regras" de propósito
+
+Em sistemas com muita leitura e pouca escrita, às vezes vale a pena **desnormalizar** de propósito — duplicar
+algum dado para evitar JOINs custosos em consultas muito frequentes. Isso é uma decisão consciente de performance,
+não um erro de modelagem — mas só faz sentido depois de entender bem a versão normalizada primeiro.
+
+## Um roteiro simples para modelar um banco novo
+
+1. Liste as "coisas" principais do sistema (usuários, chamados, categorias...).
+2. Para cada uma, defina os atributos que ela realmente precisa guardar.
+3. Identifique os relacionamentos entre elas (um usuário tem vários chamados, um chamado tem uma categoria).
+4. Desenhe as chaves primárias e estrangeiras que representam esses relacionamentos.
+5. Só depois disso, escreva o `CREATE TABLE` de cada uma.
+
+## Perguntas frequentes
+
+**Normalizar sempre deixa o banco mais rápido?**
+Não necessariamente — normalizar reduz redundância e inconsistência, mas pode exigir mais JOINs nas consultas.
+Performance é uma preocupação separada, tratada caso a caso.
+
+**Isso muda entre MySQL e PostgreSQL?**
+Não. Modelagem e normalização são conceitos de banco de dados relacional em geral, aplicáveis a qualquer SGBD.
+
+## Resumo
+
+Modelar um banco de dados é planejar tabelas, colunas e relacionamentos antes de criá-los. Normalização é o
+processo de organizar esses dados para evitar duplicação e inconsistência, geralmente resultando em várias tabelas
+menores conectadas por chaves, em vez de uma única tabela grande e repetitiva.

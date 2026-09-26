@@ -1,0 +1,118 @@
+---
+title: "Conectando uma API a um banco de dados"
+slug: "conectando-a-um-banco-de-dados"
+summary: "Como uma API FastAPI se conecta a um banco de dados real usando SQLAlchemy, substituindo listas em memória por dados persistentes."
+category: "backend"
+tags: ["backend", "fastapi", "banco-de-dados", "basico"]
+level: "basico"
+date: "2026-02-07"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do SQLAlchemy"
+    url: "https://docs.sqlalchemy.org/"
+---
+
+No artigo anterior, [criando uma API com FastAPI](/artigos/criando-uma-api-com-fastapi), os chamados eram guardados
+em uma lista Python em memória — o que significa que todos os dados somem quando o servidor reinicia. Uma API real
+precisa persistir dados em um [banco de dados](/artigos/o-que-e-um-banco-de-dados) de verdade.
+
+## ORM: a ponte entre Python e SQL
+
+Um ORM (Object-Relational Mapper) permite trabalhar com tabelas do banco como se fossem classes Python, sem
+escrever SQL manualmente para cada operação. O ORM mais usado no ecossistema Python é o **SQLAlchemy**.
+
+```bash
+pip install sqlalchemy
+```
+
+## Definindo um modelo
+
+```python
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+engine = create_engine("sqlite:///chamados.db")
+Base = declarative_base()
+
+class Chamado(Base):
+    __tablename__ = "chamados"
+
+    id = Column(Integer, primary_key=True)
+    titulo = Column(String)
+    prioridade = Column(String, default="media")
+
+Base.metadata.create_all(engine)
+
+SessionLocal = sessionmaker(bind=engine)
+```
+
+- `Chamado(Base)` define uma classe que corresponde a uma tabela chamada `chamados`.
+- `Column` define cada coluna e seu tipo — o mesmo conceito de [tabelas, colunas e chaves primárias](/artigos/tabelas-colunas-e-chaves-primarias) visto na trilha de SQL, agora representado em Python.
+- `sqlite:///chamados.db` usa SQLite (um banco simples, em arquivo) — em produção, o mesmo código funcionaria com
+  PostgreSQL ou MySQL, trocando apenas essa linha de conexão.
+
+<Callout type="info">
+SQLite é ótimo para aprender e para projetos pequenos, porque não exige instalar um servidor de banco separado. Em
+produção, PostgreSQL costuma ser a escolha mais comum para APIs Python.
+</Callout>
+
+## Usando o banco dentro da API FastAPI
+
+```python
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+
+app = FastAPI()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@app.post("/chamados")
+def criar_chamado(titulo: str, prioridade: str = "media", db: Session = Depends(get_db)):
+    novo = Chamado(titulo=titulo, prioridade=prioridade)
+    db.add(novo)
+    db.commit()
+    db.refresh(novo)
+    return novo
+
+@app.get("/chamados")
+def listar_chamados(db: Session = Depends(get_db)):
+    return db.query(Chamado).all()
+```
+
+`Depends(get_db)` é o sistema de **dependências** do FastAPI: ele garante que cada requisição receba sua própria
+conexão com o banco, e que essa conexão seja fechada corretamente ao final — mesmo se der erro no meio do caminho.
+
+## O ciclo básico de uma operação no banco
+
+```
+1. Abrir uma sessão (conexão) com o banco
+2. Criar/consultar/alterar objetos através dela
+3. db.commit() → confirma a alteração de fato no banco
+4. Fechar a sessão
+```
+
+Sem `db.commit()`, as alterações ficam pendentes e não são salvas — um erro comum de quem está começando com
+SQLAlchemy.
+
+## Perguntas frequentes
+
+**Preciso saber SQL para usar um ORM?**
+Sim, pelo menos o básico. O ORM traduz suas operações em SQL por trás dos panos, mas entender
+[SELECT, WHERE e ORDER BY](/artigos/select-where-e-order-by) ajuda muito a entender o que o ORM está realmente
+fazendo — e a resolver problemas de performance mais adiante.
+
+**Todo projeto FastAPI precisa de SQLAlchemy?**
+Não necessariamente — existem outras opções de ORM e até quem prefira SQL puro. SQLAlchemy é, hoje, a escolha mais
+comum na comunidade Python.
+
+## Resumo
+
+Um ORM como o SQLAlchemy permite representar tabelas do banco como classes Python, eliminando a necessidade de
+escrever SQL manualmente na maior parte das operações. Combinado com o sistema de dependências do FastAPI
+(`Depends`), isso permite que cada requisição da API leia e grave dados de forma segura e persistente.

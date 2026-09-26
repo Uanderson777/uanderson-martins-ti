@@ -1,0 +1,96 @@
+---
+title: "Branches e merge"
+slug: "branches-e-merge"
+summary: "O que são branches no Git, como criar, trocar entre elas e uni-las com merge, incluindo como lidar com conflitos."
+category: "git-github"
+tags: ["git", "branches", "basico"]
+level: "basico"
+date: "2026-02-18"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Uma branch (ramificação) é uma linha independente de desenvolvimento dentro do mesmo repositório. Ela permite
+testar, corrigir ou desenvolver algo novo sem afetar o código principal até que a alteração esteja pronta.
+
+## Por que usar branches
+
+Sem branches, qualquer alteração vai direto para o histórico principal — o que é arriscado se a alteração ainda
+está incompleta ou pode quebrar algo. Com branches, cada funcionalidade ou correção evolui isoladamente, e só é
+unida ao código principal quando estiver pronta e revisada.
+
+## Criando e trocando de branch
+
+```bash
+git branch nova-funcionalidade      # cria a branch
+git checkout nova-funcionalidade    # muda para ela
+
+# ou, em um único comando:
+git checkout -b nova-funcionalidade
+```
+
+A partir daqui, todo commit feito fica registrado apenas nessa branch, sem afetar `main` (a branch principal).
+
+## Visualizando o que aconteceu
+
+```
+main:               A ── B ── C
+                          \
+nova-funcionalidade:       D ── E
+```
+
+`nova-funcionalidade` parte do mesmo ponto de `main` (commit B), mas segue seu próprio caminho a partir dali.
+
+## merge: unindo branches
+
+```bash
+git checkout main
+git merge nova-funcionalidade
+```
+
+Isso traz as alterações de `nova-funcionalidade` para dentro de `main`. Se as alterações não colidirem com nada
+que mudou em `main` nesse meio tempo, o merge acontece automaticamente.
+
+```
+main (depois do merge):   A ── B ── C ────── F
+                                \          /
+nova-funcionalidade:             D ── E ──
+```
+
+## Quando acontece um conflito
+
+Um **conflito de merge** acontece quando a mesma parte de um arquivo foi alterada de formas diferentes em duas
+branches. O Git não sabe qual versão manter, e marca o trecho no arquivo:
+
+```python
+<<<<<<< HEAD
+prazo_sla = 24
+=======
+prazo_sla = 12
+>>>>>>> nova-funcionalidade
+```
+
+<Callout type="atencao">
+Resolver um conflito significa editar o arquivo manualmente, decidindo qual trecho manter (ou combinando os dois),
+removendo as marcações (`<<<<<<<`, `=======`, `>>>>>>>`), e então fazendo um novo commit confirmando a resolução.
+</Callout>
+
+## Boas práticas com branches
+
+- Use nomes descritivos: `corrige-bug-login`, `adiciona-filtro-por-prioridade` — não `teste` ou `branch2`.
+- Mantenha branches de vida curta — quanto mais tempo uma branch fica sem merge, maior a chance de conflito.
+- Delete branches já unidas (`git branch -d nome-da-branch`) para manter o repositório organizado.
+
+## Perguntas frequentes
+
+**Posso ter várias branches abertas ao mesmo tempo?**
+Sim, sem limite — é comum ter várias funcionalidades em desenvolvimento paralelo, cada uma em sua branch.
+
+**Um conflito de merge significa que fiz algo errado?**
+Não necessariamente — é uma consequência natural de trabalho em equipe. O importante é saber resolver com calma.
+
+## Resumo
+
+Branches permitem desenvolver isoladamente, sem afetar o código principal. `merge` une o trabalho de volta,
+automaticamente quando possível — e manualmente, resolvendo conflitos, quando as alterações colidem. Dominar esse
+fluxo é essencial para trabalhar em qualquer projeto colaborativo.

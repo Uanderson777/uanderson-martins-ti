@@ -1,0 +1,79 @@
+---
+title: "Base de conhecimento e documentação"
+slug: "base-de-conhecimento-e-documentacao"
+summary: "Por que a base de conhecimento é uma das ferramentas mais subestimadas do Service Desk, e como escrever um artigo de conhecimento útil."
+category: "service-desk"
+tags: ["service-desk", "documentacao", "iniciante"]
+level: "iniciante"
+date: "2026-02-14"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Base de conhecimento é o repositório de soluções documentadas para problemas já resolvidos antes. É, na prática,
+uma das ferramentas mais poderosas — e mais subestimadas — de um Service Desk.
+
+## Por que a base de conhecimento importa
+
+Sem uma base de conhecimento, cada novo analista precisa "reaprender" soluções que já foram descobertas antes, e
+cada chamado repetido exige investigação do zero. Com uma boa base:
+
+- O **N1** resolve mais chamados sozinho, sem precisar escalonar.
+- O **tempo de resolução** cai, porque a solução já está documentada.
+- O conhecimento **não depende de uma pessoa específica** — se alguém sai da equipe, a solução continua registrada.
+
+<Callout type="info">
+Uma métrica interessante de acompanhar: qual porcentagem dos chamados fechados pelo N1 usaram um artigo da base de
+conhecimento? Isso mostra o quanto a documentação está realmente sendo usada no dia a dia, não só existindo.
+</Callout>
+
+## O que faz um bom artigo de conhecimento
+
+Um artigo de base de conhecimento eficaz não é só "o que fazer" — ele também ajuda quem lê a confirmar que está no
+problema certo antes de seguir os passos.
+
+```
+Título: Wi-Fi corporativo não conecta em notebooks Windows
+Sintomas: Rede aparece na lista, mas fica "Obtendo endereço IP" indefinidamente
+Causa provável: Cache de configuração de rede corrompido
+Solução:
+  1. Esqueça a rede Wi-Fi nas configurações
+  2. Reinicie o adaptador de rede (Gerenciador de Dispositivos)
+  3. Reconecte à rede e insira a senha novamente
+  4. Se persistir, execute: ipconfig /release seguido de ipconfig /renew
+Quando escalonar: Se o problema persistir em mais de um dispositivo do mesmo usuário
+Última atualização: 14/02/2026
+```
+
+Note os elementos: **sintomas** claros (para confirmar que é o mesmo problema), **passos numerados** (fáceis de
+seguir), e **quando escalonar** (para não travar indefinidamente em um artigo que não resolve).
+
+## Quando criar um novo artigo
+
+- Depois de resolver um chamado que exigiu investigação não trivial.
+- Quando o mesmo tipo de chamado se repete várias vezes.
+- Quando um problema foi escalonado e resolvido em N2/N3 — vale documentar para que o N1 resolva sozinho da
+  próxima vez.
+
+## Mantendo a base de conhecimento viva
+
+Uma base de conhecimento desatualizada é tão prejudicial quanto não ter nenhuma — pode levar a soluções que não
+funcionam mais (por exemplo, depois de uma atualização de sistema). Revisar artigos periodicamente, e sempre
+registrar a data da última atualização, evita esse problema.
+
+## Perguntas frequentes
+
+**Quem deve escrever os artigos: N1, N2 ou N3?**
+Qualquer nível pode e deve contribuir — especialmente quem resolveu o problema originalmente, enquanto o contexto
+ainda está fresco.
+
+**A base de conhecimento substitui o treinamento de novos analistas?**
+Não substitui, mas acelera bastante — um bom acervo de artigos reduz a curva de aprendizado de quem está
+começando.
+
+## Resumo
+
+Uma base de conhecimento bem mantida reduz escalonamentos desnecessários, acelera a resolução de chamados
+recorrentes e preserva conhecimento que, de outra forma, ficaria só na cabeça de quem resolveu o problema da
+primeira vez. Documentar bem — com sintomas, passos claros e quando escalonar — é o que faz a diferença entre uma
+base útil e uma base que ninguém consulta.

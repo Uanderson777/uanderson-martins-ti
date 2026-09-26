@@ -1,0 +1,75 @@
+---
+title: "O que são embeddings?"
+slug: "o-que-sao-embeddings"
+summary: "O conceito de embeddings explicado de forma visual e intuitiva: como transformar texto em números que capturam significado."
+category: "inteligencia-artificial"
+tags: ["ia", "embeddings", "basico"]
+level: "basico"
+date: "2026-02-26"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Embeddings são representações numéricas de texto (ou imagem, áudio, etc.) que capturam **significado** — de forma
+que textos com sentidos parecidos fiquem representados por números parecidos, mesmo que usem palavras diferentes.
+
+## Por que transformar texto em números
+
+Computadores não comparam "significado" diretamente — eles comparam números. Um embedding traduz um texto para uma
+lista de números (um **vetor**) de forma que essa comparação numérica reflita a similaridade de sentido entre os
+textos originais.
+
+```
+"Meu Wi-Fi não conecta"        → [0.12, -0.45, 0.88, ...]
+"Não consigo acessar a rede"   → [0.14, -0.41, 0.85, ...]  (vetor parecido)
+"Qual é a capital da França?"  → [0.90,  0.02, -0.31, ...] (vetor bem diferente)
+```
+
+As duas primeiras frases, apesar de usarem palavras diferentes, têm significado semelhante — e seus embeddings
+ficam numericamente próximos. A terceira, sobre um assunto totalmente diferente, fica distante das outras duas.
+
+## Medindo "proximidade" entre embeddings
+
+A forma mais comum de medir o quão parecidos dois embeddings são é a **similaridade de cosseno**: quanto mais
+próximo de 1, mais parecido o significado; quanto mais próximo de 0 (ou negativo), mais diferente.
+
+<Callout type="info">
+Você não precisa calcular isso manualmente no dia a dia — bibliotecas e bancos de dados vetoriais já fazem essa
+comparação por trás dos panos. O importante é entender o que ela representa: proximidade de significado.
+</Callout>
+
+## Por que isso importa: buscar por significado, não por palavra exata
+
+Uma busca tradicional (por palavra-chave) só encontra um documento se ele contiver exatamente as palavras
+buscadas. Uma busca por embeddings encontra documentos com significado semelhante, mesmo que as palavras exatas
+sejam diferentes — é essa capacidade que torna embeddings a peça central de sistemas de busca semântica e de
+[RAG](/artigos/o-que-e-rag), assunto do próximo artigo desta trilha.
+
+## Um exemplo prático: base de conhecimento de Service Desk
+
+Imagine uma base de conhecimento com o artigo "Wi-Fi corporativo não conecta em notebooks Windows" (veja também o
+artigo sobre [base de conhecimento](/artigos/base-de-conhecimento-e-documentacao)). Um usuário pesquisa
+"não consigo acessar a rede sem fio no meu notebook" — palavras diferentes, mesmo problema. Uma busca por
+embeddings consegue conectar as duas frases pelo significado, mesmo sem nenhuma palavra em comum.
+
+## Onde embeddings são armazenados
+
+Embeddings costumam ser guardados em um **banco de dados vetorial** (vector database), otimizado especificamente
+para buscas de similaridade em grandes volumes de vetores — um conceito que aparece com frequência em pipelines de
+RAG.
+
+## Perguntas frequentes
+
+**Preciso treinar meu próprio modelo de embeddings?**
+Raramente. A maioria dos projetos usa modelos de embeddings já prontos, disponíveis via API, sem necessidade de
+treinar um do zero.
+
+**Embeddings servem só para texto?**
+Não — o mesmo conceito se aplica a imagens, áudio e outros tipos de dado, sempre com o objetivo de representar
+"significado" ou "conteúdo" como números comparáveis.
+
+## Resumo
+
+Embeddings transformam texto (ou outros dados) em vetores numéricos que capturam significado, permitindo comparar
+o quão semanticamente parecidos dois conteúdos são — mesmo sem palavras em comum. É a base técnica por trás de
+buscas semânticas e de sistemas de RAG.

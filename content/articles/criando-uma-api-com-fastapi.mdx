@@ -1,0 +1,119 @@
+---
+title: "Criando uma API com FastAPI"
+slug: "criando-uma-api-com-fastapi"
+summary: "Primeiro projeto prático com FastAPI: instalação, rotas GET e POST, validação com Pydantic e documentação automática."
+category: "fastapi"
+tags: ["fastapi", "python", "api", "basico"]
+level: "basico"
+date: "2026-02-06"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do FastAPI"
+    url: "https://fastapi.tiangolo.com/"
+---
+
+FastAPI é um framework Python para construir [APIs REST](/artigos/o-que-e-uma-api-rest) de forma rápida, com
+validação automática de dados e documentação interativa gerada sozinha. Este artigo assume que você já instalou
+Python (veja o artigo [como instalar Python](/artigos/como-instalar-python)).
+
+## Instalação
+
+```bash
+pip install fastapi uvicorn
+```
+
+- **FastAPI** é o framework que você usa para escrever a API.
+- **Uvicorn** é o servidor que efetivamente roda a aplicação.
+
+## Primeiro projeto: uma API de chamados
+
+```python
+# main.py
+from fastapi import FastAPI
+
+app = FastAPI()
+
+chamados = []
+
+@app.get("/chamados")
+def listar_chamados():
+    return chamados
+
+@app.post("/chamados")
+def criar_chamado(titulo: str, prioridade: str = "media"):
+    novo_chamado = {"id": len(chamados) + 1, "titulo": titulo, "prioridade": prioridade}
+    chamados.append(novo_chamado)
+    return novo_chamado
+```
+
+Para rodar:
+
+```bash
+uvicorn main:app --reload
+```
+
+- `@app.get("/chamados")` define uma rota que responde a requisições `GET` em `/chamados`.
+- `@app.post("/chamados")` define uma rota que responde a `POST`, recebendo dados para criar um novo chamado.
+- `--reload` reinicia o servidor automaticamente a cada alteração no código — útil durante o desenvolvimento.
+
+<Callout type="info">
+Com o servidor rodando, acesse `http://localhost:8000/docs` no navegador — o FastAPI gera automaticamente uma
+documentação interativa (Swagger UI), onde você pode testar cada rota sem precisar de outra ferramenta.
+</Callout>
+
+## Validando dados com Pydantic
+
+Em vez de receber parâmetros soltos, o mais comum é definir um **modelo** para o corpo da requisição:
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class NovoChamado(BaseModel):
+    titulo: str
+    prioridade: str = "media"
+
+chamados = []
+
+@app.post("/chamados")
+def criar_chamado(chamado: NovoChamado):
+    registro = {"id": len(chamados) + 1, **chamado.dict()}
+    chamados.append(registro)
+    return registro
+```
+
+O `BaseModel` do Pydantic valida automaticamente o formato dos dados recebidos — se `titulo` não for enviado como
+texto, por exemplo, a API já responde com um erro `422` claro, sem você precisar escrever essa validação na mão.
+
+## Path parameters: buscando um item específico
+
+```python
+@app.get("/chamados/{chamado_id}")
+def buscar_chamado(chamado_id: int):
+    for chamado in chamados:
+        if chamado["id"] == chamado_id:
+            return chamado
+    return {"erro": "Chamado não encontrado"}
+```
+
+`{chamado_id}` na URL é um **path parameter** — o FastAPI já converte o valor para `int` automaticamente, de
+acordo com o tipo declarado na função.
+
+## Perguntas frequentes
+
+**Preciso saber POO para usar FastAPI?**
+O básico ajuda bastante — modelos do Pydantic são classes. Veja o artigo sobre
+[POO em Python](/artigos/poo-em-python) se ainda não tiver familiaridade.
+
+**FastAPI substitui o banco de dados?**
+Não. FastAPI cuida da camada de API; o armazenamento de dados de verdade normalmente vem de um banco como
+PostgreSQL ou MySQL, conectado à API — assunto do próximo artigo desta trilha.
+
+## Resumo
+
+FastAPI permite criar rotas `GET` e `POST` de forma direta, com validação automática de dados via Pydantic e
+documentação interativa gerada sem esforço extra. É, hoje, uma das formas mais rápidas de sair de "só sei Python"
+para "sei construir uma API real".

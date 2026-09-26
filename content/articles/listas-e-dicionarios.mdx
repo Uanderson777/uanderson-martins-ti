@@ -1,0 +1,109 @@
+---
+title: "Listas e dicionários"
+slug: "listas-e-dicionarios"
+summary: "As duas estruturas de dados mais usadas em programação: listas (sequências ordenadas) e dicionários (pares chave-valor), com exemplos práticos."
+category: "logica-de-programacao"
+tags: ["logica-de-programacao", "listas", "dicionarios", "iniciante"]
+level: "iniciante"
+date: "2026-02-03"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Depois de variáveis, condicionais, loops e funções, a próxima peça fundamental da lógica de programação é saber
+guardar **várias informações juntas**, de forma organizada. É para isso que existem listas e dicionários.
+
+## Listas: sequências ordenadas
+
+Uma lista guarda vários valores, em uma ordem definida, acessados por posição (índice).
+
+```python
+chamados = ["Wi-Fi lento", "Impressora", "E-mail"]
+
+print(chamados[0])   # Wi-Fi lento (a contagem começa em 0)
+print(chamados[-1])  # E-mail (índice negativo conta do final)
+print(len(chamados)) # 3 (quantidade de itens)
+```
+
+### Operações comuns em listas
+
+```python
+chamados.append("Senha bloqueada")   # adiciona no final
+chamados.remove("Impressora")         # remove pelo valor
+chamados.sort()                       # ordena em ordem alfabética
+
+for chamado in chamados:
+    print(chamado)
+```
+
+<Callout type="info">
+Listas em Python podem misturar tipos diferentes (`[1, "texto", True]`), mas na prática é mais comum e mais claro
+manter uma lista com um único tipo de dado.
+</Callout>
+
+## Dicionários: pares chave-valor
+
+Um dicionário guarda valores associados a uma **chave** — em vez de acessar por posição, você acessa pelo nome.
+
+```python
+chamado = {
+    "id": 101,
+    "titulo": "Wi-Fi lento",
+    "prioridade": "media",
+    "status": "aberto",
+}
+
+print(chamado["titulo"])       # Wi-Fi lento
+print(chamado.get("prazo"))    # None (chave que não existe, sem gerar erro)
+chamado["status"] = "fechado"  # atualiza um valor
+```
+
+### Percorrendo um dicionário
+
+```python
+for chave, valor in chamado.items():
+    print(f"{chave}: {valor}")
+```
+
+## Quando usar cada estrutura
+
+| Situação | Estrutura |
+|---|---|
+| Uma sequência de itens do mesmo tipo, em ordem | Lista |
+| Um item com vários atributos nomeados | Dicionário |
+| Vários itens, cada um com vários atributos | Lista de dicionários |
+
+## Combinando as duas: lista de dicionários
+
+```python
+chamados = [
+    {"id": 1, "titulo": "Wi-Fi lento", "prioridade": "media"},
+    {"id": 2, "titulo": "Servidor fora do ar", "prioridade": "alta"},
+]
+
+for chamado in chamados:
+    print(f"#{chamado['id']} - {chamado['titulo']} ({chamado['prioridade']})")
+```
+
+Esse padrão — uma lista de dicionários — é exatamente como a maioria das APIs retorna dados no formato JSON, e é a
+base do que você vai ver ao estudar [FastAPI](/fastapi) e bancos de dados mais adiante.
+
+## Perguntas frequentes
+
+**Lista e array são a mesma coisa?**
+Em Python, "lista" é o termo correto — `array` existe como um tipo separado, mais restrito, e menos usado no dia a
+dia. Em outras linguagens, como Java, "array" é o termo padrão para uma coleção ordenada de tamanho fixo.
+
+**Dicionário mantém a ordem dos itens?**
+Sim, desde versões recentes do Python (3.7+), dicionários preservam a ordem em que os itens foram inseridos.
+
+## Exercício
+
+Crie uma lista de dicionários representando 3 chamados de Service Desk (com `titulo` e `prioridade`), depois
+escreva um loop que imprima apenas os chamados com prioridade `"alta"`.
+
+## Resumo
+
+Listas guardam sequências ordenadas de itens, acessadas por posição. Dicionários guardam pares chave-valor,
+acessados por nome. Combinando as duas — uma lista de dicionários — você já consegue representar dados bem
+próximos do que APIs reais retornam, o que prepara terreno para as próximas trilhas deste site.

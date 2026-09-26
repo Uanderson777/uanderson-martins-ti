@@ -1,0 +1,60 @@
+---
+title: "Variáveis e tipos de dados"
+slug: "variaveis-e-tipos-de-dados"
+summary: "O conceito de variável e os tipos de dados fundamentais, explicados de forma independente de linguagem."
+category: "logica-de-programacao"
+tags: ["logica-de-programacao", "variaveis", "iniciante"]
+level: "iniciante"
+date: "2026-01-21"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Uma variável é um espaço nomeado na memória do computador, usado para guardar um valor que pode mudar ao longo da
+execução de um programa — daí o nome "variável".
+
+## Por que variáveis existem
+
+Sem variáveis, um programa não conseguiria guardar informação nenhuma: nem o resultado de um cálculo, nem o que o
+usuário digitou, nem o estado de um jogo. Toda variável tem três partes: um **nome**, um **tipo** (o que ela pode
+guardar) e um **valor** (o que ela guarda agora).
+
+## Os tipos de dados mais comuns
+
+| Tipo | O que representa | Exemplo |
+|---|---|---|
+| Texto (string) | Sequência de caracteres | `"Uanderson"` |
+| Inteiro (int) | Número sem casas decimais | `28` |
+| Decimal (float) | Número com casas decimais | `9.5` |
+| Booleano (bool) | Verdadeiro ou falso | `true` / `false` |
+
+<Callout type="info">
+Cada linguagem tem sua própria sintaxe para declarar variáveis, mas esses quatro tipos aparecem em praticamente
+todas elas — Python, Java, JavaScript, C# etc.
+</Callout>
+
+## Tipagem: uma diferença importante entre linguagens
+
+- **Tipagem dinâmica** (ex.: Python) — você não precisa dizer o tipo; a linguagem descobre pelo valor.
+- **Tipagem estática** (ex.: Java) — você declara o tipo explicitamente, e ele não muda depois.
+
+```python
+# Python (tipagem dinâmica)
+idade = 28
+```
+
+```java
+// Java (tipagem estática)
+int idade = 28;
+```
+
+## Constantes
+
+Uma constante é como uma variável, mas seu valor não deve mudar depois de definido — útil para valores fixos,
+como o valor de PI ou uma taxa de SLA fixa em um sistema de Service Desk.
+
+## Resumo
+
+Variáveis guardam valores que podem mudar durante a execução do programa; constantes guardam valores que não
+mudam. Os tipos básicos — texto, inteiro, decimal e booleano — aparecem em praticamente toda linguagem de
+programação, mudando apenas a sintaxe para declará-los.

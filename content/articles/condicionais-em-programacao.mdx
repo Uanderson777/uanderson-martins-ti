@@ -1,0 +1,86 @@
+---
+title: "Condicionais (if / else)"
+slug: "condicionais-em-programacao"
+summary: "Como programas tomam decisões usando if, else e elif, com exemplos práticos e erros comuns."
+category: "logica-de-programacao"
+tags: ["logica-de-programacao", "condicionais", "iniciante"]
+level: "iniciante"
+date: "2026-01-22"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Condicionais são a forma de um programa tomar decisões: "se isso for verdade, faça aquilo; senão, faça outra
+coisa". É o que permite que um programa se comporte de maneira diferente dependendo da situação.
+
+## A estrutura básica
+
+```python
+idade = 20
+
+if idade >= 18:
+    print("Maior de idade")
+else:
+    print("Menor de idade")
+```
+
+- `if` testa uma condição.
+- Se a condição for verdadeira, o bloco dentro do `if` roda.
+- `else` é o que roda quando a condição é falsa.
+
+## Testando múltiplas condições com elif
+
+```python
+nota = 7
+
+if nota >= 9:
+    print("Excelente")
+elif nota >= 7:
+    print("Bom")
+elif nota >= 5:
+    print("Regular")
+else:
+    print("Insuficiente")
+```
+
+O Python testa as condições em ordem, de cima para baixo, e para na primeira que for verdadeira.
+
+## Operadores de comparação
+
+| Operador | Significado |
+|---|---|
+| `==` | igual a |
+| `!=` | diferente de |
+| `>` | maior que |
+| `<` | menor que |
+| `>=` | maior ou igual |
+| `<=` | menor ou igual |
+
+<Callout type="atencao">
+Um erro muito comum de iniciante é confundir `=` (atribuição, guarda um valor) com `==` (comparação, verifica se
+dois valores são iguais). `idade = 18` guarda 18 em `idade`; `idade == 18` pergunta se `idade` vale 18.
+</Callout>
+
+## Combinando condições
+
+```python
+tem_ingresso = True
+idade = 20
+
+if tem_ingresso and idade >= 18:
+    print("Pode entrar")
+else:
+    print("Não pode entrar")
+```
+
+`and` exige que as duas condições sejam verdadeiras; `or` exige que pelo menos uma seja.
+
+## Exercício
+
+Escreva um trecho de código que, dado o valor de um chamado de Service Desk (`prioridade`), imprima "Urgente" se a
+prioridade for "alta", "Moderado" se for "média" e "Baixo" para qualquer outro valor.
+
+## Resumo
+
+Condicionais (`if`, `elif`, `else`) permitem que um programa tome decisões diferentes dependendo dos dados. É um
+dos blocos mais usados em qualquer programa — de validações simples a regras de negócio complexas.

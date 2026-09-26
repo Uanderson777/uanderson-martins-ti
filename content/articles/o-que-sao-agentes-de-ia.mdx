@@ -1,0 +1,97 @@
+---
+title: "O que são agentes de IA?"
+slug: "o-que-sao-agentes-de-ia"
+summary: "O que diferencia um agente de IA de um simples chatbot: tool calling, planejamento, memória e os limites atuais dessa tecnologia."
+category: "inteligencia-artificial"
+tags: ["ia", "agentes", "basico"]
+level: "basico"
+date: "2026-02-28"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Um agente de IA é um sistema construído em torno de um [LLM](/artigos/o-que-sao-llms) que, além de gerar texto,
+consegue **tomar ações** — consultar uma API, buscar em um banco de dados, executar um cálculo — para cumprir uma
+tarefa, muitas vezes em várias etapas encadeadas.
+
+## A diferença entre um LLM simples e um agente
+
+Um LLM comum responde uma pergunta com texto. Um agente pode decidir que, para responder bem, primeiro precisa
+**fazer algo** — e só depois formular a resposta final.
+
+```
+Pergunta simples a um LLM:
+  "Qual é a capital da França?" → "Paris" (resposta direta)
+
+Pergunta a um agente:
+  "Qual é o status do chamado #482?"
+    → decide chamar uma ferramenta: consultar_chamado(482)
+    → recebe o resultado da ferramenta
+    → formula a resposta final com base no resultado real
+```
+
+## Tool calling: a peça central de um agente
+
+**Tool calling** (chamada de ferramentas) é o mecanismo que permite ao modelo solicitar a execução de uma função
+externa — uma consulta a um banco de dados, uma busca na web, uma chamada de API — e receber o resultado de volta
+para continuar seu raciocínio.
+
+```
+1. O modelo recebe a pergunta e a lista de ferramentas disponíveis
+2. O modelo decide se e qual ferramenta usar
+3. O sistema executa a ferramenta (fora do modelo) e devolve o resultado
+4. O modelo usa esse resultado para responder, ou decide chamar outra ferramenta
+```
+
+<Callout type="info">
+O modelo em si não "executa" nada — ele apenas decide *qual* ferramenta chamar e com quais parâmetros. Quem
+efetivamente executa a ação é o sistema em volta do modelo, que depois devolve o resultado para ele continuar.
+</Callout>
+
+## Planejamento e memória
+
+- **Planejamento** — em tarefas mais complexas, um agente pode dividir o objetivo em passos intermediários antes
+  de agir, em vez de tentar resolver tudo em uma única chamada.
+- **Memória** — a capacidade de lembrar informações de interações anteriores, seja dentro da mesma conversa
+  (memória de curto prazo) ou entre conversas diferentes (memória de longo prazo, geralmente armazenada
+  externamente).
+
+## Um exemplo aplicado a Service Desk
+
+Um agente de IA conectado a um sistema de Service Desk poderia, a partir de uma única instrução como "verifique se
+há chamados de prioridade alta sem resposta há mais de 2 horas e me avise":
+
+```
+1. Chamar uma ferramenta para consultar chamados abertos, filtrando por prioridade alta
+2. Calcular o tempo desde a abertura de cada um
+3. Filtrar os que passaram de 2 horas sem resposta
+4. Formatar e apresentar essa lista ao analista
+```
+
+Cada uma dessas etapas pode envolver uma chamada de ferramenta distinta, coordenada pelo próprio agente.
+
+## Limitações e cuidados
+
+- Um agente pode escolher a ferramenta errada, ou interpretar mal um resultado — erros nas etapas intermediárias
+  se propagam para a resposta final.
+- Dar a um agente acesso a ações que alteram dados (criar, editar, apagar) exige mais cuidado do que apenas
+  permitir consultas — vale sempre limitar o escopo do que um agente pode fazer sem supervisão.
+- Agentes ainda são uma tecnologia em evolução rápida — boas práticas de segurança e limitação de escopo são tão
+  importantes quanto a capacidade técnica em si.
+
+## Perguntas frequentes
+
+**Todo chatbot é um agente de IA?**
+Não. Um chatbot que só responde perguntas com texto, sem executar nenhuma ação externa, não é um agente — a
+característica central de um agente é a capacidade de agir, não só responder.
+
+**Preciso saber programar para criar um agente?**
+Sim, na maioria dos casos — construir as ferramentas que o agente pode chamar e a lógica de orquestração ao redor
+dele exige conhecimento de programação, geralmente em Python.
+
+## Resumo
+
+Agentes de IA vão além de responder perguntas: usam tool calling para executar ações externas, podem planejar
+etapas intermediárias e manter memória de contexto. É a tecnologia que conecta LLMs a sistemas reais — bancos de
+dados, APIs, ferramentas de automação — permitindo tarefas de múltiplas etapas, com os devidos cuidados de escopo
+e segurança.

@@ -1,0 +1,90 @@
+---
+title: "Programação orientada a objetos em Python"
+slug: "poo-em-python"
+summary: "Classes, objetos, atributos, métodos e herança em Python, explicados com um exemplo de sistema de chamados."
+category: "python"
+tags: ["python", "poo", "intermediario"]
+level: "basico"
+date: "2026-02-04"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Programação Orientada a Objetos (POO) é um jeito de organizar código em torno de **objetos** — estruturas que
+combinam dados (atributos) e comportamento (métodos) em um único lugar. Em vez de funções soltas manipulando
+dados soltos, você modela o problema como "coisas" com propriedades e ações.
+
+## Classe: o molde do objeto
+
+```python
+class Chamado:
+    def __init__(self, titulo, prioridade):
+        self.titulo = titulo
+        self.prioridade = prioridade
+        self.status = "aberto"
+
+    def fechar(self):
+        self.status = "fechado"
+
+chamado1 = Chamado("Wi-Fi lento", "media")
+print(chamado1.titulo)      # Wi-Fi lento
+print(chamado1.status)      # aberto
+
+chamado1.fechar()
+print(chamado1.status)      # fechado
+```
+
+- `class Chamado` define o **molde** — a estrutura que todo objeto `Chamado` vai seguir.
+- `__init__` é o **construtor** — roda automaticamente quando um objeto é criado, definindo seus atributos iniciais.
+- `self` representa o próprio objeto — é assim que um método acessa os atributos daquela instância específica.
+- `fechar` é um **método** — uma função que pertence à classe e pode alterar o estado do objeto.
+
+<Callout type="info">
+Cada `Chamado` que você cria (`chamado1`, `chamado2`...) é uma **instância** independente da classe, com seus
+próprios valores para `titulo`, `prioridade` e `status`.
+</Callout>
+
+## Herança: reaproveitando comportamento
+
+```python
+class ChamadoUrgente(Chamado):
+    def __init__(self, titulo):
+        super().__init__(titulo, prioridade="alta")
+        self.sla_horas = 1
+
+incidente = ChamadoUrgente("Servidor de e-mail fora do ar")
+print(incidente.prioridade)  # alta (herdado de Chamado)
+print(incidente.sla_horas)   # 1 (específico de ChamadoUrgente)
+```
+
+`ChamadoUrgente` **herda** de `Chamado`: ganha tudo que `Chamado` já tinha, e ainda pode adicionar ou sobrescrever
+comportamento próprio. `super().__init__(...)` chama o construtor da classe "mãe".
+
+## Os quatro pilares da POO (visão geral)
+
+- **Encapsulamento** — agrupar dados e comportamento relacionados dentro de uma classe.
+- **Herança** — reaproveitar comportamento de uma classe em outra mais específica.
+- **Polimorfismo** — objetos de classes diferentes respondendo ao mesmo método de formas diferentes.
+- **Abstração** — expor só o que é necessário usar, escondendo os detalhes internos de implementação.
+
+## Quando vale a pena usar POO
+
+Para scripts pequenos, funções soltas já resolvem bem. POO começa a valer a pena quando seu programa tem várias
+"coisas" com estado próprio que interagem entre si — como usuários, chamados e categorias em um sistema de
+Service Desk, ou como os modelos de dados de uma [API com FastAPI](/fastapi).
+
+## Perguntas frequentes
+
+**Preciso usar POO em tudo que eu programar?**
+Não. Muitos scripts e automações simples são mais claros com funções soltas. Use POO quando o problema realmente
+tem "objetos" com estado e comportamento próprios.
+
+**Qual a diferença entre atributo e método?**
+Atributo é um dado guardado no objeto (`self.titulo`); método é uma ação que o objeto pode realizar
+(`chamado.fechar()`).
+
+## Resumo
+
+POO organiza código em classes (moldes) e objetos (instâncias), combinando dados e comportamento. Herança permite
+reaproveitar código entre classes relacionadas. É um dos conceitos que mais aparece em frameworks como o FastAPI,
+onde modelos de dados são normalmente definidos como classes.

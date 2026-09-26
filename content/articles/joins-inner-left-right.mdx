@@ -1,0 +1,84 @@
+---
+title: "JOINs (INNER, LEFT, RIGHT)"
+slug: "joins-inner-left-right"
+summary: "Como combinar dados de duas tabelas usando INNER JOIN, LEFT JOIN e RIGHT JOIN, com exemplos visuais."
+category: "sql"
+tags: ["sql", "join", "intermediario"]
+level: "basico"
+date: "2026-01-30"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+`JOIN` combina linhas de duas (ou mais) tabelas com base em uma coluna relacionada — geralmente uma chave
+estrangeira. É o comando que dá poder real aos bancos relacionais: em vez de duplicar dados, você os conecta.
+
+## As tabelas de exemplo
+
+```
+usuarios                      chamados
++----+---------+              +----+---------------+-------------+
+| id | nome    |              | id | titulo        | usuario_id  |
++----+---------+              +----+---------------+-------------+
+| 1  | Ana     |              | 1  | Wi-Fi lento   | 1           |
+| 2  | Carlos  |              | 2  | Impressora    | 2           |
+| 3  | Beatriz |              | 3  | E-mail        | 1           |
++----+---------+              +----+---------------+-------------+
+```
+
+## INNER JOIN: só o que existe nas duas tabelas
+
+```sql
+SELECT usuarios.nome, chamados.titulo
+FROM chamados
+INNER JOIN usuarios ON chamados.usuario_id = usuarios.id;
+```
+
+Resultado: Ana → Wi-Fi lento, Carlos → Impressora, Ana → E-mail. **Beatriz não aparece**, porque ela não tem
+nenhum chamado — o `INNER JOIN` só retorna linhas que têm correspondência nas duas tabelas.
+
+## LEFT JOIN: tudo da tabela da esquerda, mesmo sem correspondência
+
+```sql
+SELECT usuarios.nome, chamados.titulo
+FROM usuarios
+LEFT JOIN chamados ON usuarios.id = chamados.usuario_id;
+```
+
+Resultado: Ana → Wi-Fi lento, Ana → E-mail, Carlos → Impressora, **Beatriz → NULL**. Como `usuarios` é a tabela à
+esquerda do `LEFT JOIN`, todos os usuários aparecem — mesmo quem não tem chamado, com `titulo` retornando `NULL`.
+
+## RIGHT JOIN: tudo da tabela da direita
+
+```sql
+SELECT usuarios.nome, chamados.titulo
+FROM chamados
+RIGHT JOIN usuarios ON chamados.usuario_id = usuarios.id;
+```
+
+Produz o mesmo resultado do `LEFT JOIN` anterior, só que invertendo qual tabela é "a base" — `RIGHT JOIN` garante
+que tudo de `usuarios` (à direita, nesta consulta) apareça.
+
+<Callout type="info">
+Na prática, `LEFT JOIN` é usado com muito mais frequência que `RIGHT JOIN` — a maioria dos desenvolvedores prefere
+reordenar a consulta para usar sempre `LEFT JOIN`, por ser mais intuitivo de ler.
+</Callout>
+
+## Resumindo visualmente
+
+```
+INNER JOIN  → interseção das duas tabelas
+LEFT JOIN   → tudo da esquerda + interseção
+RIGHT JOIN  → tudo da direita + interseção
+```
+
+## Exercício
+
+Escreva uma consulta que liste todos os usuários e a quantidade de chamados que cada um abriu, incluindo usuários
+com zero chamados. (Dica: combine `LEFT JOIN` com `COUNT` e `GROUP BY`.)
+
+## Resumo
+
+`INNER JOIN` retorna apenas linhas com correspondência nas duas tabelas; `LEFT JOIN` retorna tudo da tabela da
+esquerda, mesmo sem correspondência; `RIGHT JOIN` faz o mesmo para a tabela da direita. Entender qual tabela é a
+"base" da consulta é a chave para escolher o JOIN certo.

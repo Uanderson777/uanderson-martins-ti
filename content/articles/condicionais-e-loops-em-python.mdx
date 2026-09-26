@@ -1,0 +1,92 @@
+---
+title: "Condicionais e loops em Python"
+slug: "condicionais-e-loops-em-python"
+summary: "A sintaxe específica de if/elif/else e for/while em Python, com exemplos práticos além da teoria geral."
+category: "python"
+tags: ["python", "condicionais", "loops", "iniciante"]
+level: "iniciante"
+date: "2026-01-26"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Se você já entende o conceito de condicionais e loops (veja o artigo da trilha de Lógica de Programação), este
+artigo foca na sintaxe específica do Python — incluindo alguns detalhes que costumam confundir quem vem de outras
+linguagens.
+
+## Indentação em vez de chaves
+
+Diferente de Java ou JavaScript, o Python usa **indentação** (espaços no início da linha) para definir blocos de
+código, em vez de chaves `{ }`.
+
+```python
+idade = 20
+
+if idade >= 18:
+    print("Maior de idade")
+    print("Pode dirigir")
+else:
+    print("Menor de idade")
+```
+
+<Callout type="atencao">
+Misturar espaços e tabs na indentação é uma fonte comum de erro em Python. Configure seu editor para usar sempre
+espaços (o VS Code já faz isso por padrão para arquivos `.py`).
+</Callout>
+
+## if ternário (condicional em uma linha)
+
+```python
+idade = 20
+status = "maior" if idade >= 18 else "menor"
+print(status)  # maior
+```
+
+Útil para atribuições simples, mas evite abusar dele em condições muito complexas — a legibilidade cai.
+
+## for percorrendo diferentes estruturas
+
+```python
+# Lista
+for cor in ["vermelho", "verde", "azul"]:
+    print(cor)
+
+# Dicionário
+chamado = {"id": 101, "status": "aberto"}
+for chave, valor in chamado.items():
+    print(chave, "->", valor)
+
+# Números com range
+for i in range(1, 6):  # de 1 até 5
+    print(i)
+```
+
+## while com else (recurso pouco conhecido)
+
+```python
+tentativas = 0
+
+while tentativas < 3:
+    print(f"Tentativa {tentativas + 1}")
+    tentativas += 1
+else:
+    print("Todas as tentativas foram usadas")
+```
+
+O bloco `else` de um `while` roda quando o loop termina normalmente (sem um `break`).
+
+## List comprehension: uma forma compacta de usar for
+
+```python
+pares = [n for n in range(10) if n % 2 == 0]
+print(pares)  # [0, 2, 4, 6, 8]
+```
+
+Essa é uma forma idiomática do Python de criar uma nova lista a partir de um loop — vale a pena conhecer, mesmo
+que no início prefira o `for` tradicional por ser mais claro.
+
+## Resumo
+
+Python usa indentação (não chaves) para blocos de código, com pequenas variações práticas sobre a teoria geral de
+condicionais e loops: if ternário, `else` em loops, e list comprehensions são recursos específicos da linguagem
+que valem a pena conhecer conforme você ganha confiança.

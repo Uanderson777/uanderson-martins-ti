@@ -1,0 +1,85 @@
+---
+title: "Escalonamento (N1 → N2 → N3)"
+slug: "escalonamento-n1-n2-n3"
+summary: "Como e quando escalonar um chamado entre os níveis de suporte, e a diferença entre escalonamento funcional e hierárquico."
+category: "service-desk"
+tags: ["service-desk", "escalonamento", "iniciante"]
+level: "iniciante"
+date: "2026-02-13"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Escalonamento é o processo de transferir um chamado para um nível de atendimento mais especializado (ou para outra
+pessoa responsável), quando quem está atendendo não consegue resolver dentro do seu escopo ou dentro do prazo.
+
+## Os níveis de atendimento, revisitados
+
+```
+Usuário
+  ↓
+N1 — Triagem, problemas simples e conhecidos
+  ↓ (escalonamento funcional)
+N2 — Problemas técnicos mais específicos
+  ↓ (escalonamento funcional)
+N3 — Especialistas, desenvolvimento, infraestrutura avançada
+```
+
+## Dois tipos de escalonamento
+
+- **Escalonamento funcional** — o chamado sobe de nível técnico (N1 → N2 → N3) porque exige mais conhecimento
+  especializado do que o nível atual possui.
+- **Escalonamento hierárquico** — o chamado é levado a um gestor ou responsável, não por falta de conhecimento
+  técnico, mas por questões de prazo, prioridade ou decisão (ex.: um SLA prestes a estourar, ou um usuário
+  insatisfeito pedindo para falar com um supervisor).
+
+<Callout type="info">
+Nem todo escalonamento é "eu não sei resolver isso" — muitas vezes é simplesmente reconhecer que o problema está
+fora do escopo definido para aquele nível, o que é uma decisão correta, não uma falha do analista.
+</Callout>
+
+## Quando escalonar (e quando não escalonar)
+
+**Escalone quando:**
+- O problema exige acesso ou permissão que o N1 não possui.
+- A causa não é conhecida e exige investigação técnica mais profunda.
+- O SLA está próximo de estourar e a solução não está ao seu alcance.
+
+**Não escalone antes de:**
+- Consultar a base de conhecimento — o problema pode já ter uma solução documentada.
+- Confirmar que você seguiu a sequência básica de diagnóstico (veja a trilha de
+  [Help Desk e Suporte Técnico](/trilhas/help-desk-e-suporte-tecnico)).
+- Registrar claramente o que já foi tentado — um escalonamento sem esse histórico obriga o próximo nível a repetir
+  o mesmo diagnóstico do zero.
+
+## O que um bom escalonamento deve conter
+
+```
+Título: Servidor de e-mail intermitente
+Prioridade: Alta
+Descrição: Usuários do setor financeiro relatam quedas de conexão a cada ~30 min
+O que já foi verificado:
+  - Conectividade de rede confirmada (ping estável)
+  - Reinício do serviço de e-mail não resolveu
+  - Log de erro anexado (ver arquivo em anexo)
+Motivo do escalonamento: Requer análise do log do servidor, fora do escopo do N1
+```
+
+Um escalonamento bem documentado economiza tempo de todo mundo — inclusive do próprio usuário, que não precisa
+repetir a mesma explicação para uma nova pessoa.
+
+## Perguntas frequentes
+
+**Escalonar demais é um problema?**
+Sim — escalonar sem tentar resolver o que está dentro do escopo do N1 sobrecarrega os níveis seguintes e atrasa
+chamados que realmente precisam de atenção especializada.
+
+**O usuário pode pedir escalonamento diretamente?**
+Em geral sim, principalmente o escalonamento hierárquico (falar com um supervisor) — mas o escalonamento funcional
+costuma ser uma decisão técnica do analista.
+
+## Resumo
+
+Escalonamento move um chamado para um nível mais especializado (funcional) ou para um responsável (hierárquico),
+quando ele está fora do escopo ou do alcance de quem está atendendo. Documentar bem o que já foi verificado antes
+de escalonar é o que separa um bom escalonamento de um simples repasse do problema.

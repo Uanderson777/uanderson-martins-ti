@@ -1,0 +1,95 @@
+---
+title: "O que é uma API REST?"
+slug: "o-que-e-uma-api-rest"
+summary: "O que é uma API, o que significa REST e como os métodos HTTP (GET, POST, PUT, DELETE) representam ações sobre dados."
+category: "backend"
+tags: ["backend", "api", "rest", "iniciante"]
+level: "iniciante"
+date: "2026-02-05"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+API (Application Programming Interface) é uma forma padronizada de dois sistemas conversarem entre si. Quando um
+aplicativo de celular busca a previsão do tempo, ele não acessa o banco de dados do serviço meteorológico
+diretamente — ele faz uma requisição para uma API, que devolve os dados em um formato combinado.
+
+## REST: um estilo de arquitetura para APIs
+
+REST (Representational State Transfer) é um conjunto de convenções para construir APIs usando os recursos que o
+protocolo HTTP já oferece. Uma API "RESTful" organiza tudo em torno de **recursos** (ex.: chamados, usuários) e
+usa métodos HTTP para indicar a ação sobre esse recurso.
+
+```
+Cliente (app, navegador, outro sistema)
+  ↓  requisição HTTP
+API REST
+  ↓
+Back-End (regras de negócio)
+  ↓
+Banco de Dados
+```
+
+## Os métodos HTTP mais usados
+
+| Método | Ação | Exemplo |
+|---|---|---|
+| `GET` | Buscar dados | `GET /chamados` — lista todos os chamados |
+| `POST` | Criar um novo registro | `POST /chamados` — cria um novo chamado |
+| `PUT` | Atualizar um registro por completo | `PUT /chamados/12` — substitui o chamado 12 |
+| `PATCH` | Atualizar parte de um registro | `PATCH /chamados/12` — atualiza só o status |
+| `DELETE` | Remover um registro | `DELETE /chamados/12` — apaga o chamado 12 |
+
+<Callout type="info">
+Note o padrão de URL: `/chamados` (plural, o recurso) e `/chamados/12` (um chamado específico, pelo ID). Essa
+convenção de nomear URLs pelos recursos, não pelas ações, é uma das marcas de uma API bem desenhada.
+</Callout>
+
+## Um exemplo de requisição e resposta
+
+Requisição:
+
+```
+GET /chamados/12
+```
+
+Resposta (formato JSON, o mais comum em APIs REST):
+
+```json
+{
+  "id": 12,
+  "titulo": "Wi-Fi lento",
+  "prioridade": "media",
+  "status": "aberto"
+}
+```
+
+## Status codes: o resultado da requisição
+
+- `200 OK` — deu certo.
+- `201 Created` — um novo recurso foi criado com sucesso.
+- `400 Bad Request` — a requisição está mal formada (erro do cliente).
+- `401 Unauthorized` — falta autenticação.
+- `404 Not Found` — o recurso não existe.
+- `500 Internal Server Error` — algo deu errado no servidor.
+
+## Por que isso importa
+
+Praticamente todo sistema moderno — de aplicativos de celular a integrações entre empresas — se comunica por
+APIs. Entender REST é o primeiro passo antes de construir sua própria API, o que você verá na prática no próximo
+artigo, sobre [como criar uma API com FastAPI](/artigos/criando-uma-api-com-fastapi).
+
+## Perguntas frequentes
+
+**REST é uma tecnologia ou uma linguagem?**
+Nenhuma das duas — é um estilo arquitetural, um conjunto de convenções. Você pode implementar uma API REST em
+Python, Java, Node.js ou qualquer outra linguagem com suporte a HTTP.
+
+**Toda API é REST?**
+Não. Existem outros estilos, como GraphQL e gRPC. REST é o mais comum e o mais simples de começar a aprender.
+
+## Resumo
+
+Uma API REST expõe recursos (como chamados ou usuários) através de URLs, usando métodos HTTP (`GET`, `POST`,
+`PUT`, `DELETE`) para indicar a ação desejada, e status codes para indicar o resultado. É a base de praticamente
+toda comunicação entre sistemas na web hoje.

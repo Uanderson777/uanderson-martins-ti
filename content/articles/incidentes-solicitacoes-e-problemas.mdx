@@ -1,0 +1,85 @@
+---
+title: "Incidentes, solicitações e problemas"
+slug: "incidentes-solicitacoes-e-problemas"
+summary: "A diferença entre incidente, solicitação e problema em Service Desk, com exemplos práticos de cada categoria."
+category: "service-desk"
+tags: ["service-desk", "iniciante"]
+level: "iniciante"
+date: "2026-02-11"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+No dia a dia de um Service Desk, nem todo chamado é a mesma coisa. Classificar corretamente entre incidente,
+solicitação e problema é o que permite priorizar, medir SLA e agir na causa raiz — não só apagar incêndios.
+
+## Incidente: algo parou de funcionar
+
+Um incidente é uma interrupção não planejada ou uma redução na qualidade de um serviço que já funcionava.
+
+**Exemplos:** "Meu computador não liga", "O sistema de vendas caiu", "Não consigo acessar meu e-mail".
+
+O objetivo diante de um incidente é **restaurar o serviço o mais rápido possível** — mesmo que isso signifique uma
+solução temporária (contorno), deixando a causa raiz para ser investigada depois.
+
+## Solicitação: um pedido do usuário
+
+Uma solicitação é um pedido de algo que o usuário precisa, mas que não está quebrado — é uma necessidade nova.
+
+**Exemplos:** "Preciso de acesso ao sistema financeiro", "Preciso de uma nova senha de rede", "Preciso instalar um
+software específico".
+
+<Callout type="info">
+Uma forma simples de diferenciar: incidente é "algo está errado"; solicitação é "eu preciso de algo novo". Os dois
+geram um chamado, mas seguem fluxos de aprovação e prioridade diferentes.
+</Callout>
+
+## Problema: a causa raiz por trás de vários incidentes
+
+Um problema é a causa subjacente de um ou mais incidentes. Diferente do incidente (que exige ação imediata), o
+problema exige **investigação**.
+
+**Exemplo prático:**
+
+```
+Incidente 1: "Meu sistema travou ao gerar um relatório" (10h32)
+Incidente 2: "O sistema travou de novo comigo" (11h15)
+Incidente 3: "Mesma trava, aconteceu com outro colega" (14h03)
+                              ↓
+        Problema identificado: bug no módulo de relatórios,
+        causando trava em relatórios com mais de 10.000 linhas
+```
+
+Resolver cada incidente individualmente (reiniciando o sistema, por exemplo) não resolve o problema. É preciso
+investigar a causa raiz — nesse caso, corrigir o bug no módulo de relatórios — para que os incidentes parem de se
+repetir.
+
+## Comparando as três categorias
+
+| | Incidente | Solicitação | Problema |
+|---|---|---|---|
+| O que é | Interrupção de serviço | Pedido de algo novo | Causa raiz de incidentes |
+| Urgência típica | Alta (restaurar rápido) | Variável | Investigação, não é imediato |
+| Meta | Restaurar o serviço | Atender o pedido | Eliminar a causa |
+
+## Por que essa classificação importa
+
+Times de Service Desk que tratam tudo como "só mais um chamado" perdem a visibilidade sobre padrões — como um bug
+recorrente ou uma solicitação de acesso que sempre demora demais para ser aprovada. Classificar corretamente é o
+primeiro passo para medir e melhorar o serviço como um todo, não só reagir a cada chamado isoladamente.
+
+## Perguntas frequentes
+
+**Quem decide se algo é incidente ou problema?**
+Normalmente, o N1 registra como incidente; a identificação de um **problema** (padrão recorrente) costuma vir da
+análise do N2/N3 ou de quem acompanha as métricas do Service Desk como um todo.
+
+**Uma solicitação pode virar um incidente?**
+Não diretamente, mas uma solicitação mal atendida (ex.: acesso configurado errado) pode gerar um incidente
+posterior.
+
+## Resumo
+
+Incidente é uma interrupção que precisa ser restaurada rapidamente; solicitação é um pedido de algo novo; problema
+é a causa raiz por trás de incidentes recorrentes. Diferenciar essas três categorias é essencial para priorizar
+corretamente e enxergar padrões que um chamado isolado não revela.

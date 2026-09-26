@@ -1,0 +1,76 @@
+---
+title: "Variáveis em Python"
+slug: "variaveis-em-python"
+summary: "Como criar, nomear e usar variáveis em Python, com exemplos práticos e erros comuns de iniciante."
+category: "python"
+tags: ["python", "iniciante", "logica-de-programacao"]
+level: "iniciante"
+date: "2026-01-12"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do Python"
+    url: "https://docs.python.org/pt-br/3/"
+---
+
+Uma variável é um nome que você dá para guardar um valor na memória, para poder usá-lo depois. Em Python, você não precisa declarar o tipo da variável — o próprio Python descobre isso a partir do valor.
+
+## Criando uma variável
+
+```python
+nome = "Uanderson"
+idade = 28
+estudando_ti = True
+
+print(nome, idade, estudando_ti)
+```
+
+Aqui `nome` guarda um texto (`str`), `idade` guarda um número inteiro (`int`) e `estudando_ti` guarda um valor lógico (`bool`).
+
+## Tipos mais comuns
+
+| Tipo | Exemplo | Uso |
+|---|---|---|
+| `str` | `"Olá"` | texto |
+| `int` | `10` | número inteiro |
+| `float` | `10.5` | número decimal |
+| `bool` | `True` / `False` | verdadeiro ou falso |
+
+## Regras para nomear variáveis
+
+- Pode conter letras, números e `_`, mas não pode **começar** com número.
+- Python diferencia maiúsculas de minúsculas (`idade` e `Idade` são variáveis diferentes).
+- Por convenção, nomes de variáveis usam `snake_case`: `nome_completo`, não `nomeCompleto`.
+
+<Callout type="atencao">
+`nome-completo` (com hífen) não funciona como nome de variável em Python — o hífen é interpretado como subtração. Use `_` no lugar do espaço.
+</Callout>
+
+## Reatribuindo valores
+
+```python
+pontos = 10
+print(pontos)  # 10
+
+pontos = pontos + 5
+print(pontos)  # 15
+```
+
+Uma variável em Python pode receber um novo valor a qualquer momento — inclusive de um tipo diferente do original, embora isso normalmente não seja uma boa prática.
+
+## Erro comum de iniciante
+
+```python
+print(mensagem)
+mensagem = "Olá, mundo!"
+```
+
+Esse código gera `NameError: name 'mensagem' is not defined`, porque a variável é usada **antes** de ser criada. Em Python, o código roda de cima para baixo — a variável só existe a partir da linha em que ela é criada.
+
+## Exercício
+
+Crie três variáveis — `linguagem`, `ano_que_comecei` e `gosto_de_programar` — com um tipo diferente cada, e imprima as três com `print()`.
+
+## Resumo
+
+Variáveis em Python são criadas com `nome = valor`, sem necessidade de declarar o tipo. Use `snake_case`, evite usar uma variável antes de criá-la, e lembre-se de que o tipo é decidido automaticamente pelo valor atribuído.

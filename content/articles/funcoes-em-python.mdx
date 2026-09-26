@@ -1,0 +1,83 @@
+---
+title: "Funções em Python"
+slug: "funcoes-em-python"
+summary: "Sintaxe de funções em Python: parâmetros, retorno, argumentos nomeados, *args e **kwargs, na prática."
+category: "python"
+tags: ["python", "funcoes", "iniciante"]
+level: "iniciante"
+date: "2026-01-27"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Este artigo assume que você já entende o conceito geral de função (veja o artigo da trilha de Lógica de
+Programação) e foca nos recursos específicos que o Python oferece.
+
+## Sintaxe básica
+
+```python
+def somar(a, b):
+    return a + b
+
+resultado = somar(3, 5)
+print(resultado)  # 8
+```
+
+## Argumentos nomeados (keyword arguments)
+
+```python
+def criar_chamado(titulo, prioridade="media", categoria="geral"):
+    return f"[{prioridade.upper()}] {titulo} ({categoria})"
+
+print(criar_chamado("Impressora não imprime"))
+print(criar_chamado("Servidor fora do ar", prioridade="alta"))
+print(criar_chamado(titulo="Acesso ao sistema", categoria="acessos"))
+```
+
+Você pode chamar a função passando os argumentos por posição ou pelo nome — o que deixa o código mais legível,
+especialmente com muitos parâmetros.
+
+## *args: número variável de argumentos posicionais
+
+```python
+def total(*valores):
+    return sum(valores)
+
+print(total(10, 20, 30))  # 60
+print(total(5))           # 5
+```
+
+`*valores` recebe qualquer quantidade de argumentos e os agrupa em uma tupla.
+
+## **kwargs: número variável de argumentos nomeados
+
+```python
+def registrar_usuario(**dados):
+    for chave, valor in dados.items():
+        print(f"{chave}: {valor}")
+
+registrar_usuario(nome="Uanderson", cargo="Analista de Service Desk")
+```
+
+`**dados` agrupa argumentos nomeados em um dicionário — útil quando a quantidade de informações varia.
+
+<Callout type="info">
+Você não precisa usar `*args` e `**kwargs` no dia a dia — eles aparecem com frequência em bibliotecas e frameworks
+como o FastAPI, então vale reconhecer a sintaxe quando encontrar.
+</Callout>
+
+## Funções lambda (funções de uma linha)
+
+```python
+dobro = lambda x: x * 2
+print(dobro(5))  # 10
+```
+
+Úteis para funções curtas e descartáveis, principalmente como argumento de outras funções (`sorted`, `filter`,
+`map`). Para lógica mais complexa, prefira uma função normal com `def` — é mais legível.
+
+## Resumo
+
+Python permite argumentos nomeados com valores padrão, além de `*args` e `**kwargs` para funções com número
+variável de argumentos. Funções `lambda` são úteis para lógica curta e pontual, mas não substituem funções normais
+quando a lógica cresce.

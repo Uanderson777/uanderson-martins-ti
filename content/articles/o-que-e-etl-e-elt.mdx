@@ -1,0 +1,88 @@
+---
+title: "O que é ETL e ELT?"
+slug: "o-que-e-etl-e-elt"
+summary: "A diferença entre ETL e ELT, os três estágios do processo (extração, transformação, carga) e quando usar cada abordagem."
+category: "dados"
+tags: ["dados", "etl", "elt", "basico"]
+level: "basico"
+date: "2026-02-22"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+ETL e ELT são siglas para dois processos parecidos de mover dados de um lugar para outro, preparando-os para
+análise. A diferença está na **ordem** em que a transformação dos dados acontece.
+
+## Os três estágios
+
+- **Extract (Extração)** — buscar os dados na origem (um banco de dados, uma API, arquivos de log).
+- **Transform (Transformação)** — limpar, converter e organizar os dados no formato desejado.
+- **Load (Carga)** — carregar os dados no destino final, geralmente um [Data Warehouse](/artigos/data-warehouse-data-lake-e-lakehouse).
+
+## ETL: transforma antes de carregar
+
+```
+Origem → Extração → Transformação → Carga → Destino
+```
+
+No ETL tradicional, os dados são transformados **antes** de chegar ao destino final. Isso significa que o destino
+já recebe dados limpos e prontos para uso, mas exige um servidor de processamento intermediário para fazer essa
+transformação.
+
+## ELT: carrega antes de transformar
+
+```
+Origem → Extração → Carga → Transformação → Destino final (já transformado)
+```
+
+No ELT, os dados brutos são carregados primeiro no destino (geralmente um Data Warehouse moderno, com bastante
+capacidade de processamento), e a transformação acontece **depois**, já dentro dele — usando o próprio poder de
+processamento do Data Warehouse, em vez de um servidor separado.
+
+<Callout type="info">
+ELT ganhou popularidade com o crescimento de Data Warehouses na nuvem (como BigQuery, Snowflake e Redshift), que
+têm capacidade de processamento suficiente para fazer transformações pesadas diretamente, sem precisar de um
+servidor intermediário dedicado a isso.
+</Callout>
+
+## Comparando as duas abordagens
+
+| | ETL | ELT |
+|---|---|---|
+| Onde transforma | Antes de carregar (servidor intermediário) | Depois de carregar (no próprio destino) |
+| Ideal para | Volumes menores, regras de transformação bem definidas | Grandes volumes, com Data Warehouses potentes |
+| Flexibilidade | Menor — muda a transformação exige reprocessar tudo | Maior — dados brutos ficam disponíveis para reprocessar |
+
+## Um exemplo simples de transformação
+
+Independente da ordem (ETL ou ELT), transformações comuns incluem:
+
+```
+- Padronizar formatos de data (ex.: "01/02/2026" → "2026-02-01")
+- Remover registros duplicados
+- Preencher ou remover valores ausentes
+- Combinar dados de fontes diferentes em uma única tabela
+- Calcular métricas derivadas (ex.: tempo de resolução = data_fechamento - data_abertura)
+```
+
+## Por que isso importa para quem trabalha com dados
+
+Praticamente todo sistema de análise de dados em produção depende de um pipeline de ETL ou ELT rodando em segundo
+plano, movendo dados de sistemas operacionais (como o banco de um sistema de Service Desk) para um ambiente
+dedicado à análise, sem sobrecarregar o sistema original.
+
+## Perguntas frequentes
+
+**ELT é sempre melhor que ETL?**
+Não necessariamente — depende do volume de dados, da infraestrutura disponível e das regras de transformação
+necessárias. Muitas empresas ainda usam ETL tradicional com sucesso.
+
+**Preciso saber programar para trabalhar com ETL/ELT?**
+Conhecimento de SQL é praticamente obrigatório. Python também é muito comum para escrever a lógica de
+transformação em pipelines mais customizados.
+
+## Resumo
+
+ETL transforma os dados antes de carregá-los no destino final; ELT carrega os dados brutos primeiro e transforma
+depois, aproveitando o poder de processamento de Data Warehouses modernos. Ambos resolvem o mesmo problema —
+mover e preparar dados para análise — em ordens diferentes.

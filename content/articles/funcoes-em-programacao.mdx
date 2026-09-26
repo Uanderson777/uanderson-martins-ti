@@ -1,0 +1,74 @@
+---
+title: "Funções"
+slug: "funcoes-em-programacao"
+summary: "Por que funções existem, como criar e reutilizar blocos de código com parâmetros e retorno."
+category: "logica-de-programacao"
+tags: ["logica-de-programacao", "funcoes", "iniciante"]
+level: "iniciante"
+date: "2026-01-24"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Uma função é um bloco de código nomeado, que executa uma tarefa específica e pode ser reutilizado quantas vezes
+for preciso — sem copiar e colar o mesmo código várias vezes.
+
+## Por que usar funções
+
+- **Reutilização** — escreva a lógica uma vez, use em vários lugares.
+- **Organização** — divide um programa grande em partes menores e compreensíveis.
+- **Manutenção** — se precisar corrigir algo, corrige em um único lugar.
+
+## Criando uma função em Python
+
+```python
+def saudacao(nome):
+    return f"Olá, {nome}!"
+
+print(saudacao("Uanderson"))
+print(saudacao("Ana"))
+```
+
+- `def` inicia a criação de uma função.
+- `nome` é um **parâmetro** — uma informação que a função recebe.
+- `return` define o que a função **devolve** como resultado.
+
+## Parâmetros com valor padrão
+
+```python
+def saudacao(nome, saudacao_inicial="Olá"):
+    return f"{saudacao_inicial}, {nome}!"
+
+print(saudacao("Uanderson"))              # Olá, Uanderson!
+print(saudacao("Ana", "Bom dia"))         # Bom dia, Ana!
+```
+
+Se você não informar `saudacao_inicial`, a função usa o valor padrão `"Olá"`.
+
+<Callout type="info">
+Uma função pode não ter `return` — nesse caso, ela apenas executa uma ação (como imprimir algo na tela) sem
+devolver um valor para ser usado depois.
+</Callout>
+
+## Um exemplo mais próximo da prática
+
+```python
+def calcular_sla(prioridade):
+    prazos = {"alta": 4, "media": 24, "baixa": 72}
+    return prazos.get(prioridade, 72)
+
+print(calcular_sla("alta"))   # 4 (horas)
+print(calcular_sla("media"))  # 24
+```
+
+Essa função encapsula a regra de negócio "qual é o prazo de SLA para cada prioridade" em um único lugar — se o
+prazo mudar, você só precisa alterar aqui.
+
+## Exercício
+
+Crie uma função `eh_par(numero)` que retorne `True` se o número for par e `False` caso contrário.
+
+## Resumo
+
+Funções agrupam um bloco de código reutilizável, recebem parâmetros como entrada e podem devolver um resultado com
+`return`. É uma das ferramentas mais importantes para manter um código organizado à medida que um programa cresce.

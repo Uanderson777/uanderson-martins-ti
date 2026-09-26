@@ -1,0 +1,72 @@
+---
+title: "Como instalar Python e configurar o ambiente"
+slug: "como-instalar-python"
+summary: "Passo a passo para instalar o Python no Windows e configurar um editor de código para começar a programar."
+category: "python"
+tags: ["python", "iniciante", "instalacao"]
+level: "iniciante"
+date: "2026-01-25"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do Python — Download"
+    url: "https://www.python.org/downloads/"
+  - label: "Visual Studio Code"
+    url: "https://code.visualstudio.com/"
+---
+
+Antes de escrever a primeira linha de código, você precisa de duas coisas: o **Python instalado** no seu
+computador e um **editor de código** para escrever os arquivos `.py`.
+
+## 1. Instalando o Python no Windows
+
+1. Acesse a página oficial de downloads do Python.
+2. Baixe a versão mais recente disponível para Windows.
+3. Ao executar o instalador, marque a opção **"Add python.exe to PATH"** antes de clicar em instalar — isso é o
+   que permite rodar `python` a partir de qualquer pasta no terminal.
+4. Conclua a instalação.
+
+<Callout type="atencao">
+Esquecer de marcar "Add to PATH" é o erro mais comum nesta etapa — se isso acontecer, o comando `python` não é
+reconhecido no terminal depois. Se isso ocorrer, reinstale marcando a opção corretamente.
+</Callout>
+
+## 2. Confirmando que a instalação funcionou
+
+Abra o **Prompt de Comando** (ou PowerShell) e digite:
+
+```bash
+python --version
+```
+
+Se aparecer algo como `Python 3.12.0`, a instalação deu certo.
+
+## 3. Instalando um editor de código
+
+O **Visual Studio Code (VS Code)** é o editor mais usado para Python atualmente: é gratuito, leve e tem uma
+extensão oficial de Python com autocompletar, depuração e integração com o terminal.
+
+1. Baixe e instale o VS Code.
+2. Abra o VS Code, vá até a aba de extensões e instale a extensão **Python** (da Microsoft).
+
+## 4. Rodando seu primeiro programa
+
+Crie um arquivo chamado `ola.py` com o seguinte conteúdo:
+
+```python
+print("Olá, mundo!")
+```
+
+No terminal, dentro da pasta onde o arquivo está, rode:
+
+```bash
+python ola.py
+```
+
+Se aparecer `Olá, mundo!` na tela, seu ambiente está pronto.
+
+## Resumo
+
+Instalar o Python envolve baixar o instalador oficial, marcar a opção de adicionar ao PATH, e confirmar com
+`python --version`. Um editor como o VS Code, com a extensão de Python, é o suficiente para começar a programar de
+forma produtiva.

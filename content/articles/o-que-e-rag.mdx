@@ -1,0 +1,89 @@
+---
+title: "O que é RAG?"
+slug: "o-que-e-rag"
+summary: "O que é Retrieval-Augmented Generation, por que ele existe e como funciona o pipeline básico de busca + geração."
+category: "inteligencia-artificial"
+tags: ["ia", "rag", "basico"]
+level: "basico"
+date: "2026-02-27"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+RAG (Retrieval-Augmented Generation, ou "Geração Aumentada por Recuperação") é uma técnica que combina busca de
+informação com geração de texto por um [LLM](/artigos/o-que-sao-llms), permitindo que a IA responda com base em
+documentos específicos, em vez de depender só do que aprendeu durante o treinamento.
+
+## Por que RAG existe
+
+Um LLM sozinho tem duas limitações importantes: não conhece dados privados ou muito recentes (não usados no seu
+treinamento), e pode "alucinar" informações quando não tem certeza. RAG resolve boa parte disso: em vez de pedir
+para o modelo "lembrar" de algo, você busca a informação relevante primeiro, e entrega ela como contexto na
+pergunta.
+
+## O pipeline básico de RAG
+
+```
+Usuário faz uma pergunta
+        ↓
+Busca (retrieval) nos documentos relevantes, usando embeddings
+        ↓
+Os trechos mais relevantes viram "contexto"
+        ↓
+Pergunta + contexto são enviados ao LLM
+        ↓
+LLM gera uma resposta baseada no contexto fornecido
+```
+
+## Um exemplo prático
+
+Imagine um assistente de IA treinado para responder dúvidas sobre a base de conhecimento de um Service Desk:
+
+1. Um usuário pergunta: "Por que meu Wi-Fi corporativo não conecta?"
+2. O sistema busca, na base de conhecimento, os artigos com maior similaridade semântica a essa pergunta (usando
+   [embeddings](/artigos/o-que-sao-embeddings)).
+3. O artigo relevante (por exemplo, sobre Wi-Fi não conectando em notebooks Windows) é incluído como contexto.
+4. O LLM gera uma resposta baseada nesse artigo específico — não em um conhecimento genérico e possivelmente
+   desatualizado.
+
+<Callout type="info">
+RAG não "treina" o modelo com seus documentos — ele simplesmente fornece o conteúdo relevante como parte da
+pergunta, a cada consulta. Isso significa que atualizar a base de conhecimento não exige retreinar nada.
+</Callout>
+
+## Chunking: dividindo documentos em pedaços
+
+Documentos longos costumam ser divididos em pedaços menores (**chunks**) antes de gerar os embeddings — buscar
+similaridade em um parágrafo específico é mais preciso do que em um documento inteiro de várias páginas.
+
+```
+Documento original (10 páginas)
+        ↓ chunking
+Chunk 1 (parágrafo 1-3)
+Chunk 2 (parágrafo 4-6)
+Chunk 3 (parágrafo 7-10)
+```
+
+Cada chunk recebe seu próprio embedding, e a busca compara a pergunta do usuário com cada chunk individualmente,
+não com o documento inteiro.
+
+## Por que RAG é tão usado hoje
+
+RAG é a técnica mais comum para conectar um LLM a conhecimento específico de uma empresa, um produto ou uma base
+de documentação — sem precisar treinar um modelo customizado do zero, o que seria muito mais caro e complexo.
+
+## Perguntas frequentes
+
+**RAG substitui o fine-tuning de um modelo?**
+Não necessariamente — são abordagens diferentes, que podem até ser combinadas. RAG é geralmente mais simples e
+rápido de implementar para a maioria dos casos de uso com documentos específicos.
+
+**RAG elimina completamente as alucinações do LLM?**
+Reduz bastante, mas não elimina por completo — o modelo ainda pode interpretar mal o contexto fornecido. Verificar
+respostas críticas continua sendo uma boa prática.
+
+## Resumo
+
+RAG combina busca por similaridade (usando embeddings) com geração de texto por um LLM, permitindo respostas
+baseadas em documentos específicos e atualizáveis, sem precisar retreinar o modelo. É a técnica mais comum para
+conectar IA generativa a conhecimento particular de uma empresa ou projeto.

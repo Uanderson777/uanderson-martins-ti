@@ -1,0 +1,69 @@
+---
+title: "O que é um banco de dados?"
+slug: "o-que-e-um-banco-de-dados"
+summary: "O que é um banco de dados, a diferença entre bancos relacionais e não relacionais, e os conceitos de tabela, registro e chave primária."
+category: "sql"
+tags: ["sql", "banco-de-dados", "iniciante"]
+level: "iniciante"
+date: "2026-01-28"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do MySQL"
+    url: "https://dev.mysql.com/doc/"
+  - label: "Documentação oficial do PostgreSQL"
+    url: "https://www.postgresql.org/docs/"
+---
+
+Um banco de dados é um sistema organizado para armazenar, consultar e gerenciar dados de forma estruturada e
+persistente — ou seja, os dados continuam lá mesmo depois que o programa que os usa é fechado.
+
+## SGBD: o programa que gerencia o banco
+
+SGBD (Sistema de Gerenciamento de Banco de Dados) é o software que efetivamente guarda, organiza e permite
+consultar os dados. MySQL e PostgreSQL são exemplos de SGBDs relacionais.
+
+## Banco relacional x banco não relacional
+
+| | Relacional (SQL) | Não relacional (NoSQL) |
+|---|---|---|
+| Estrutura | Tabelas com linhas e colunas | Documentos, chave-valor, grafos, etc. |
+| Relacionamento | Definido por chaves entre tabelas | Geralmente embutido no próprio documento |
+| Exemplos | MySQL, PostgreSQL | MongoDB, Redis |
+| Quando usar | Dados estruturados, com relações claras | Dados semiestruturados, alta escala de leitura/escrita |
+
+Este site foca em bancos **relacionais**, por serem a base mais comum no dia a dia de desenvolvimento back-end.
+
+## Os conceitos fundamentais de um banco relacional
+
+- **Tabela** — uma coleção de dados sobre um mesmo assunto (ex.: tabela `usuarios`, tabela `chamados`).
+- **Coluna** — um atributo dos dados (ex.: `nome`, `email`, `data_criacao`).
+- **Registro (linha)** — um item individual dentro da tabela (ex.: um usuário específico).
+- **Chave primária** — a coluna que identifica cada registro de forma única (ex.: `id`).
+- **Chave estrangeira** — uma coluna que referencia a chave primária de outra tabela, criando um relacionamento.
+
+<Callout type="info">
+Pense em uma tabela como uma planilha: cada coluna é um cabeçalho, cada linha é um registro. A diferença é que um
+banco de dados garante regras, relacionamentos e consultas muito mais poderosas do que uma planilha.
+</Callout>
+
+## Um exemplo de relacionamento
+
+```
+Tabela: usuarios              Tabela: chamados
++----+-----------+           +----+---------------+-------------+
+| id | nome      |           | id | titulo        | usuario_id  |
++----+-----------+           +----+---------------+-------------+
+| 1  | Ana       |           | 1  | Wi-Fi lento   | 1           |
+| 2  | Carlos    |           | 2  | Impressora    | 2           |
++----+-----------+           +----+---------------+-------------+
+```
+
+A coluna `usuario_id` na tabela `chamados` é uma **chave estrangeira** — ela aponta para o `id` na tabela
+`usuarios`, conectando cada chamado ao usuário que o abriu.
+
+## Resumo
+
+Um banco de dados relacional organiza informação em tabelas, com colunas definindo os atributos e linhas
+representando os registros. Chaves primárias identificam cada registro; chaves estrangeiras conectam tabelas entre
+si — essa é a base para entender consultas SQL, que vêm no próximo artigo desta trilha.

@@ -1,0 +1,108 @@
+---
+title: "INSERT, UPDATE e DELETE"
+slug: "insert-update-e-delete"
+summary: "Os três comandos que alteram dados em SQL: como inserir, atualizar e apagar registros com segurança."
+category: "sql"
+tags: ["sql", "iniciante"]
+level: "iniciante"
+date: "2026-02-09"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Depois de aprender a consultar dados com [SELECT, WHERE e ORDER BY](/artigos/select-where-e-order-by), este artigo
+cobre os três comandos que efetivamente alteram dados em uma tabela: `INSERT`, `UPDATE` e `DELETE`.
+
+## INSERT: adicionando um novo registro
+
+```sql
+INSERT INTO chamados (titulo, prioridade, status)
+VALUES ('Wi-Fi lento', 'media', 'aberto');
+```
+
+Você lista as colunas que quer preencher e, na mesma ordem, os valores correspondentes. Colunas com `DEFAULT` ou
+`AUTO_INCREMENT` (como o `id`) podem ser omitidas.
+
+### Inserindo vários registros de uma vez
+
+```sql
+INSERT INTO chamados (titulo, prioridade) VALUES
+    ('Impressora sem tinta', 'baixa'),
+    ('Servidor de e-mail fora do ar', 'alta');
+```
+
+## UPDATE: alterando registros existentes
+
+```sql
+UPDATE chamados
+SET status = 'fechado'
+WHERE id = 12;
+```
+
+<Callout type="atencao">
+**Nunca rode um `UPDATE` sem `WHERE`** em uma tabela real — sem essa cláusula, o comando atualiza **todos** os
+registros da tabela, não só um. Esse é um dos erros mais custosos (e mais comuns) em SQL.
+</Callout>
+
+### Atualizando várias colunas
+
+```sql
+UPDATE chamados
+SET status = 'em_andamento', prioridade = 'alta'
+WHERE titulo LIKE '%servidor%';
+```
+
+## DELETE: removendo registros
+
+```sql
+DELETE FROM chamados
+WHERE status = 'fechado' AND data_abertura < '2025-01-01';
+```
+
+O mesmo cuidado do `UPDATE` vale aqui: **`DELETE FROM chamados;` sem `WHERE` apaga todos os registros da tabela.**
+
+## Um hábito de segurança: teste antes com SELECT
+
+Antes de rodar um `UPDATE` ou `DELETE` com uma condição que você não tem 100% de certeza, rode primeiro um
+`SELECT` com a mesma condição, para conferir exatamente quais linhas serão afetadas:
+
+```sql
+-- 1. Confira o que será afetado
+SELECT * FROM chamados WHERE status = 'fechado' AND data_abertura < '2025-01-01';
+
+-- 2. Só depois de confirmar, rode o DELETE com a mesma condição
+DELETE FROM chamados WHERE status = 'fechado' AND data_abertura < '2025-01-01';
+```
+
+## Transações: desfazendo um erro a tempo
+
+```sql
+BEGIN;
+
+UPDATE chamados SET status = 'fechado' WHERE id = 12;
+
+-- Se algo parecer errado, você ainda pode desfazer:
+ROLLBACK;
+
+-- Ou, se estiver tudo certo, confirma de vez:
+COMMIT;
+```
+
+Transações (`BEGIN` / `COMMIT` / `ROLLBACK`) permitem agrupar várias alterações e só confirmá-las de fato quando
+tudo estiver correto — muito usado quando várias tabelas precisam ser alteradas juntas de forma consistente.
+
+## Perguntas frequentes
+
+**UPDATE e DELETE podem ser desfeitos depois do COMMIT?**
+Não diretamente. Depois de um `COMMIT`, a alteração é permanente — por isso o hábito de testar com `SELECT`
+antes é tão importante.
+
+**Preciso sempre usar transações?**
+Não para operações simples e isoladas, mas são essenciais quando várias tabelas precisam mudar juntas (ex.:
+transferir um chamado de um usuário para outro, atualizando duas tabelas ao mesmo tempo).
+
+## Resumo
+
+`INSERT` adiciona registros, `UPDATE` altera registros existentes e `DELETE` os remove — sempre com uma cláusula
+`WHERE` bem definida para evitar afetar a tabela inteira por engano. Testar com `SELECT` antes e usar transações
+quando necessário são hábitos que evitam a maioria dos erros graves em produção.

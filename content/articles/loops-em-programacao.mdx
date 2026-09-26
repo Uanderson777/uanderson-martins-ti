@@ -1,0 +1,78 @@
+---
+title: "Loops (for / while)"
+slug: "loops-em-programacao"
+summary: "Como repetir tarefas em um programa usando for e while, com exemplos e o cuidado com loops infinitos."
+category: "logica-de-programacao"
+tags: ["logica-de-programacao", "loops", "iniciante"]
+level: "iniciante"
+date: "2026-01-23"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Loops (laços de repetição) permitem executar um bloco de código várias vezes, sem precisar repetir o código
+manualmente. São essenciais sempre que você precisa processar uma lista de itens, repetir uma ação um número de
+vezes, ou esperar até que uma condição mude.
+
+## for: repetir um número definido de vezes
+
+```python
+for i in range(5):
+    print(i)
+# Imprime: 0 1 2 3 4
+```
+
+`range(5)` gera os números de 0 a 4 — cinco valores. O `for` também é muito usado para percorrer listas:
+
+```python
+chamados = ["Impressora", "Wi-Fi", "E-mail"]
+
+for chamado in chamados:
+    print(f"Atendendo: {chamado}")
+```
+
+## while: repetir enquanto uma condição for verdadeira
+
+```python
+tentativas = 0
+
+while tentativas < 3:
+    print(f"Tentativa {tentativas + 1}")
+    tentativas += 1
+```
+
+O `while` continua rodando enquanto a condição (`tentativas < 3`) for verdadeira. É mais usado quando você não
+sabe, de antemão, quantas repetições vão acontecer.
+
+<Callout type="atencao">
+Um erro clássico de iniciante é esquecer de atualizar a variável da condição dentro do `while` — isso cria um
+**loop infinito**, que trava o programa. No exemplo acima, se `tentativas += 1` fosse removido, o loop nunca
+pararia.
+</Callout>
+
+## for x while: qual escolher?
+
+| Situação | Use |
+|---|---|
+| Você sabe quantas vezes precisa repetir | `for` |
+| Você precisa repetir até uma condição mudar | `while` |
+| Você está percorrendo uma lista | `for` |
+
+## break e continue
+
+```python
+for numero in range(10):
+    if numero == 5:
+        break  # interrompe o loop completamente
+    if numero % 2 == 0:
+        continue  # pula para a próxima repetição
+    print(numero)
+```
+
+`break` encerra o loop imediatamente; `continue` pula o restante do bloco atual e passa para a próxima repetição.
+
+## Resumo
+
+`for` repete um número definido de vezes ou percorre uma coleção; `while` repete enquanto uma condição for
+verdadeira. `break` e `continue` dão controle fino sobre quando parar ou pular uma repetição — e cuidado especial
+é necessário no `while` para evitar loops infinitos.

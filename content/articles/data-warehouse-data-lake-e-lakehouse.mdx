@@ -1,0 +1,85 @@
+---
+title: "Data Warehouse, Data Lake e Lakehouse"
+slug: "data-warehouse-data-lake-e-lakehouse"
+summary: "As diferenças entre Data Warehouse, Data Lake e Data Lakehouse, quando usar cada arquitetura e como elas se relacionam com ETL/ELT."
+category: "dados"
+tags: ["dados", "data-warehouse", "data-lake", "basico"]
+level: "basico"
+date: "2026-02-23"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Depois de entender [ETL e ELT](/artigos/o-que-e-etl-e-elt), o próximo conceito importante é: para onde esses dados
+vão? As três respostas mais comuns são Data Warehouse, Data Lake e, mais recentemente, Data Lakehouse.
+
+## Data Warehouse: dados estruturados e prontos para análise
+
+Um Data Warehouse guarda dados **estruturados**, já limpos e organizados em tabelas — pensado especificamente para
+consultas analíticas rápidas (relatórios, dashboards).
+
+```
+Bancos operacionais → ETL → Data Warehouse → Dashboards e relatórios
+```
+
+**Exemplos:** Amazon Redshift, Google BigQuery, Snowflake.
+
+## Data Lake: qualquer tipo de dado, em qualquer formato
+
+Um Data Lake armazena dados **brutos**, estruturados ou não — planilhas, logs, imagens, JSON — sem exigir que
+sejam organizados em um formato específico antes de guardar.
+
+```
+Fontes diversas → Data Lake (dados brutos, qualquer formato)
+```
+
+<Callout type="info">
+A vantagem do Data Lake é a flexibilidade: você guarda tudo primeiro, e decide como processar depois. A
+desvantagem é que, sem organização e governança, um Data Lake mal cuidado vira o que a comunidade de dados chama
+de brincando de "data swamp" (pântano de dados) — difícil de navegar e de confiar.
+</Callout>
+
+## Data Lakehouse: o meio-termo mais recente
+
+Data Lakehouse combina a flexibilidade de armazenamento do Data Lake com recursos de organização e performance de
+consulta parecidos com os de um Data Warehouse — usando tecnologias como o Apache Iceberg para trazer estrutura e
+confiabilidade a dados armazenados em um Data Lake.
+
+## Comparando as três arquiteturas
+
+| | Data Warehouse | Data Lake | Data Lakehouse |
+|---|---|---|---|
+| Tipo de dado | Estruturado | Qualquer formato | Qualquer formato, com estrutura opcional |
+| Custo de armazenamento | Mais alto | Mais baixo | Baixo, com performance de consulta melhor que um Lake puro |
+| Uso típico | Relatórios e dashboards | Machine Learning, dados brutos, exploração | Ambos os casos, em uma arquitetura só |
+
+## Como isso se conecta com o restante da trilha
+
+```
+Sistemas de origem (ex.: banco do Service Desk)
+        ↓ (Extract)
+   Pipeline de ETL/ELT
+        ↓ (Load)
+Data Warehouse / Data Lake / Lakehouse
+        ↓
+Dashboards, relatórios, modelos de IA
+```
+
+Entender essa cadeia — de onde o dado nasce até onde ele é consumido — é o que dá contexto para o resto da trilha
+de Dados, e também para a trilha de [Apache Kafka](/kafka), quando os dados chegam em tempo real, não em lotes.
+
+## Perguntas frequentes
+
+**Toda empresa precisa de um Data Warehouse?**
+Não. Empresas pequenas, com volume de dados menor, costumam resolver bem com um banco de dados relacional comum e
+consultas SQL diretas, sem a complexidade adicional de um Data Warehouse dedicado.
+
+**Data Lakehouse substitui completamente o Data Warehouse?**
+Em muitos casos, sim — é uma tendência recente. Mas Data Warehouses tradicionais continuam amplamente usados,
+especialmente em empresas já consolidadas nessa arquitetura.
+
+## Resumo
+
+Data Warehouse guarda dados estruturados, prontos para análise; Data Lake guarda dados brutos, em qualquer
+formato, com mais flexibilidade e menos organização; Data Lakehouse busca o melhor dos dois mundos. A escolha
+depende do volume de dados, da variedade de formatos e da maturidade da equipe de dados da empresa.

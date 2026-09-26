@@ -1,0 +1,81 @@
+---
+title: "Prioridade, impacto e urgência"
+slug: "prioridade-impacto-e-urgencia"
+summary: "Como calcular a prioridade de um chamado combinando impacto e urgência, com uma matriz prática para o dia a dia."
+category: "service-desk"
+tags: ["service-desk", "sla", "iniciante"]
+level: "iniciante"
+date: "2026-02-12"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+No artigo sobre [o que é SLA](/artigos/o-que-e-sla), vimos que a prioridade de um chamado é o que define seu
+prazo. Este artigo detalha como essa prioridade é calculada, a partir de dois fatores: impacto e urgência.
+
+## Impacto: quantas pessoas ou processos são afetados
+
+Impacto mede o **tamanho** do efeito do problema — não sua velocidade, mas sua abrangência.
+
+- **Alto** — afeta toda a empresa ou um processo crítico do negócio (ex.: sistema de vendas fora do ar).
+- **Médio** — afeta um setor ou grupo específico de usuários.
+- **Baixo** — afeta uma única pessoa, sem efeito em outros processos.
+
+## Urgência: quão rápido isso precisa ser resolvido
+
+Urgência mede a **velocidade** necessária, considerando o contexto do negócio no momento.
+
+- **Alta** — precisa ser resolvido imediatamente; qualquer atraso já causa prejuízo.
+- **Média** — precisa ser resolvido em breve, mas não é uma emergência.
+- **Baixa** — pode esperar, sem prejuízo relevante no curto prazo.
+
+## A matriz de prioridade
+
+Combinando impacto e urgência, chega-se à prioridade final:
+
+```
+                     Urgência Alta   Urgência Média   Urgência Baixa
+Impacto Alto         Crítica         Alta             Média
+Impacto Médio        Alta            Média            Baixa
+Impacto Baixo        Média           Baixa            Baixa
+```
+
+<Callout type="atencao">
+Um erro comum de quem está começando é confundir a urgência **percebida pelo usuário** com a urgência real do
+negócio. Todo usuário tende a marcar seu próprio chamado como "urgente" — cabe ao analista avaliar impacto e
+urgência de forma objetiva, com base em critérios definidos pela empresa.
+</Callout>
+
+## Exemplos práticos
+
+| Situação | Impacto | Urgência | Prioridade |
+|---|---|---|---|
+| Servidor de e-mail de toda a empresa fora do ar | Alto | Alta | Crítica |
+| Um sistema departamental lento, mas funcionando | Médio | Média | Média |
+| Um usuário não consegue imprimir um documento | Baixo | Baixa | Baixa |
+| Um diretor não consegue acessar um sistema antes de uma reunião importante | Baixo (1 pessoa) | Alta (contexto específico) | Média/Alta |
+
+O último exemplo mostra por que a avaliação não pode ser puramente mecânica: o contexto (uma reunião importante em
+minutos) pode justificar tratar como mais urgente um chamado que, isoladamente, teria impacto baixo.
+
+## Por que isso não deveria ser decidido "no feeling"
+
+Ter critérios claros e documentados de impacto e urgência (geralmente definidos pela própria empresa, em uma
+política de Service Desk) evita dois problemas opostos: tratar tudo como urgente (o que esgota a equipe) e
+subestimar chamados que realmente afetam o negócio.
+
+## Perguntas frequentes
+
+**Quem define os critérios de impacto e urgência?**
+Normalmente, a gestão de TI define a política junto com as áreas de negócio, com base em quais sistemas e
+processos são considerados críticos para a empresa.
+
+**A prioridade pode mudar depois que o chamado é aberto?**
+Sim. Se novas informações aparecerem (por exemplo, descobre-se que o problema afeta mais pessoas do que se pensava
+inicialmente), a prioridade pode e deve ser reavaliada.
+
+## Resumo
+
+Prioridade é o resultado da combinação entre impacto (abrangência do problema) e urgência (velocidade necessária
+para resolvê-lo). Ter uma matriz clara e critérios objetivos evita decisões inconsistentes e ajuda a equipe a focar
+no que realmente importa primeiro.

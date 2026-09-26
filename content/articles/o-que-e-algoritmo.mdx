@@ -1,0 +1,79 @@
+---
+title: "O que é algoritmo?"
+slug: "o-que-e-algoritmo"
+summary: "O conceito de algoritmo explicado com exemplos do dia a dia e um primeiro fluxograma simples."
+category: "logica-de-programacao"
+tags: ["logica-de-programacao", "algoritmo", "iniciante"]
+level: "iniciante"
+date: "2026-01-20"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Um algoritmo é uma sequência finita de passos, bem definidos, para resolver um problema ou realizar uma tarefa.
+Não precisa envolver computador — uma receita de bolo, uma bula de remédio ou um manual de montagem de móvel são
+todos algoritmos.
+
+## As três características de um bom algoritmo
+
+- **Finito** — precisa terminar em algum momento, não pode rodar para sempre.
+- **Definido** — cada passo precisa ser claro, sem ambiguidade.
+- **Eficaz** — cada passo precisa ser realmente executável.
+
+## Exemplo: decidir se um número é par ou ímpar
+
+```
+1. Receba um número
+2. Divida o número por 2
+3. Se o resto da divisão for 0, o número é par
+4. Caso contrário, o número é ímpar
+```
+
+Em Python, esse mesmo algoritmo vira:
+
+```python
+numero = 7
+
+if numero % 2 == 0:
+    print("Par")
+else:
+    print("Ímpar")
+```
+
+O símbolo `%` é o operador de **módulo**: ele retorna o resto de uma divisão. `7 % 2` é `1` (ímpar); `8 % 2` é `0`
+(par).
+
+## Representando um algoritmo visualmente
+
+<Callout type="info">
+Fluxogramas ajudam a visualizar decisões antes de escrever código — muito útil quando o problema tem várias
+ramificações.
+</Callout>
+
+```
+Início
+  ↓
+Receber número
+  ↓
+número % 2 == 0? ──Sim──→ "Par"
+  ↓ Não
+"Ímpar"
+  ↓
+Fim
+```
+
+## Algoritmo x programa
+
+Um algoritmo é a ideia, independente de linguagem. Um programa é o algoritmo escrito em uma linguagem específica,
+pronto para o computador executar. O mesmo algoritmo (par ou ímpar) pode virar código em Python, Java, ou qualquer
+outra linguagem — a lógica por trás continua a mesma.
+
+## Exercício
+
+Escreva, em português (sem código), o algoritmo para decidir se uma pessoa pode votar, sabendo que a idade mínima
+é 16 anos.
+
+## Resumo
+
+Algoritmo é a sequência de passos que resolve um problema, independente de linguagem de programação. Aprender a
+pensar em algoritmos — antes de se preocupar com sintaxe — é a base de tudo o que vem depois em programação.

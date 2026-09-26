@@ -1,0 +1,59 @@
+---
+title: "O que é SLA?"
+slug: "o-que-e-sla"
+summary: "O que é SLA (Service Level Agreement), como ele é definido e por que é a métrica mais citada em Service Desk."
+category: "service-desk"
+tags: ["service-desk", "sla", "iniciante"]
+level: "iniciante"
+date: "2026-02-02"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+SLA (Service Level Agreement, ou Acordo de Nível de Serviço) é o compromisso formal sobre o tempo máximo para
+responder e/ou resolver um chamado. É provavelmente a métrica mais citada no dia a dia de qualquer Service Desk.
+
+## Dois tipos de prazo dentro de um SLA
+
+- **Tempo de resposta** — quanto tempo até alguém começar a olhar o chamado.
+- **Tempo de resolução** — quanto tempo até o chamado ser efetivamente resolvido.
+
+Um chamado pode ter um SLA de resposta de 1 hora e um SLA de resolução de 8 horas, por exemplo — a equipe precisa
+dar sinal de vida rápido, mesmo que a solução leve mais tempo.
+
+## O que define o prazo de um SLA
+
+O prazo geralmente é calculado a partir da **prioridade** do chamado, que por sua vez combina dois fatores:
+
+- **Impacto** — quantas pessoas ou processos são afetados (uma pessoa? o setor inteiro? a empresa toda?).
+- **Urgência** — quão rápido isso precisa ser resolvido, considerando o contexto do negócio.
+
+```
+Impacto alto + Urgência alta   → Prioridade Crítica  → SLA curto (ex.: 1h)
+Impacto médio + Urgência média → Prioridade Média     → SLA moderado (ex.: 24h)
+Impacto baixo + Urgência baixa → Prioridade Baixa     → SLA longo (ex.: 72h)
+```
+
+<Callout type="info">
+Um exemplo prático: o servidor de e-mail inteiro fora do ar (impacto alto, afeta todo mundo) tem prioridade muito
+maior do que um único usuário sem conseguir imprimir (impacto baixo, afeta uma pessoa) — mesmo que os dois pareçam
+"urgentes" para quem abriu o chamado.
+</Callout>
+
+## O que acontece quando um SLA está prestes a estourar
+
+A maioria das ferramentas de Service Desk tem alertas automáticos quando um chamado está perto de violar o SLA —
+isso costuma disparar um **escalonamento**, levando o chamado para um nível superior (N2 ou N3) ou para um
+responsável direto, antes que o prazo seja descumprido.
+
+## Por que SLA importa tanto
+
+O SLA é, ao mesmo tempo, um compromisso com o usuário e uma métrica de gestão: ele mostra se a equipe está dando
+conta da demanda dentro do prometido, e é frequentemente usado para justificar contratação de mais pessoas ou
+revisão de processos quando os prazos deixam de ser cumpridos com frequência.
+
+## Resumo
+
+SLA é o prazo combinado para responder e resolver um chamado, definido a partir da combinação de impacto e
+urgência (a prioridade). Cumprir SLA é uma das métricas centrais de qualquer Service Desk — e entender como ele é
+calculado ajuda a priorizar o trabalho corretamente no dia a dia.

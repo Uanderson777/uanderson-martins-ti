@@ -1,0 +1,81 @@
+---
+title: "O que é Git?"
+slug: "o-que-e-git"
+summary: "O que é controle de versão, por que o Git existe e como ele registra o histórico de um projeto de código."
+category: "git-github"
+tags: ["git", "iniciante"]
+level: "iniciante"
+date: "2026-02-15"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+sources:
+  - label: "Documentação oficial do Git"
+    url: "https://git-scm.com/doc"
+---
+
+Git é um sistema de controle de versão: uma ferramenta que registra o histórico de alterações de um projeto ao
+longo do tempo, permitindo voltar a versões anteriores, comparar mudanças e trabalhar em equipe sem sobrescrever o
+trabalho de outra pessoa.
+
+## O problema que o Git resolve
+
+Antes de usar controle de versão, é comum ver pastas assim:
+
+```
+projeto_final.zip
+projeto_final_v2.zip
+projeto_final_v2_corrigido.zip
+projeto_final_VERSAO_QUE_FUNCIONA.zip
+```
+
+Esse método não escala: não dá para saber exatamente o que mudou entre uma versão e outra, nem reverter uma
+alteração específica sem perder as demais. O Git substitui isso por um histórico organizado, onde cada alteração
+fica registrada com autor, data e descrição.
+
+## Os conceitos essenciais
+
+- **Repositório** — a pasta do projeto, com todo o histórico de alterações rastreado pelo Git.
+- **Commit** — um "ponto de salvamento" no histórico, com uma mensagem descrevendo o que mudou.
+- **Branch (ramificação)** — uma linha de desenvolvimento paralela, útil para testar algo sem afetar o código
+  principal.
+- **Working directory, staging area e repositório** — as três "zonas" pelas quais uma alteração passa até virar um
+  commit (veja o próximo artigo desta trilha para a prática).
+
+<Callout type="info">
+Git é diferente do GitHub: Git é a ferramenta que roda no seu computador e gerencia o histórico local; GitHub é um
+serviço online que hospeda repositórios Git e adiciona recursos de colaboração. O próximo artigo desta trilha
+aprofunda essa diferença.
+</Callout>
+
+## Um histórico de commits, visualmente
+
+```
+commit A ── commit B ── commit C (branch: main)
+                          │
+                          └── commit D ── commit E (branch: nova-funcionalidade)
+```
+
+Cada commit conhece o commit anterior — é isso que forma o histórico. Branches permitem que dois caminhos de
+desenvolvimento existam ao mesmo tempo, sendo unidos depois (merge).
+
+## Por que aprender Git é importante mesmo fora de vagas de "programador"
+
+Git aparece hoje não só em desenvolvimento de software, mas em análise de dados, documentação técnica e até em
+processos de infraestrutura (Infrastructure as Code). Saber usar o básico de Git é, cada vez mais, uma habilidade
+esperada em qualquer área técnica de TI.
+
+## Perguntas frequentes
+
+**Preciso instalar algo para usar Git?**
+Sim — o Git é instalado localmente no seu computador (Windows, Linux ou macOS) e funciona pela linha de comando ou
+por interfaces gráficas.
+
+**Git só serve para código?**
+Na prática é mais usado para código, mas tecnicamente pode versionar qualquer arquivo de texto — documentação,
+configurações, scripts SQL, entre outros.
+
+## Resumo
+
+Git é um sistema de controle de versão que registra o histórico de um projeto através de commits, permitindo
+trabalhar com branches paralelas e voltar a versões anteriores quando necessário. É a base de praticamente todo
+fluxo de trabalho colaborativo em desenvolvimento de software hoje.

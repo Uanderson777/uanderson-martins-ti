@@ -1,0 +1,96 @@
+---
+title: "git init, add e commit"
+slug: "git-init-add-e-commit"
+summary: "Os três primeiros comandos de Git que todo iniciante precisa saber, na prática, com um exemplo passo a passo."
+category: "git-github"
+tags: ["git", "iniciante", "linha-de-comando"]
+level: "iniciante"
+date: "2026-02-17"
+author: "Uanderson Martins"
+contentType: "conteudo-educacional"
+---
+
+Depois de entender [o que é Git](/artigos/o-que-e-git) na teoria, este artigo mostra os três comandos que você vai
+usar o tempo todo: `git init`, `git add` e `git commit`.
+
+## git init: iniciando um repositório
+
+```bash
+mkdir meu-projeto
+cd meu-projeto
+git init
+```
+
+`git init` transforma a pasta atual em um repositório Git — a partir de agora, o Git passa a observar as
+alterações feitas ali dentro.
+
+## As três zonas do Git
+
+```
+Working Directory  →  Staging Area  →  Repositório (histórico)
+   (seus arquivos)      (git add)         (git commit)
+```
+
+- **Working directory** — os arquivos como estão agora, na sua pasta.
+- **Staging area** — uma área intermediária onde você escolhe o que vai entrar no próximo commit.
+- **Repositório** — o histórico definitivo, depois que o commit é feito.
+
+## git add: escolhendo o que vai ser salvo
+
+```bash
+git add arquivo.py        # adiciona um arquivo específico
+git add .                 # adiciona todos os arquivos alterados
+```
+
+`git add` move as alterações da working directory para a staging area — é aqui que você decide o que vai fazer
+parte do próximo commit, e o que ainda vai esperar.
+
+## git commit: registrando um ponto no histórico
+
+```bash
+git commit -m "Adiciona função de cálculo de SLA"
+```
+
+A mensagem depois de `-m` deve descrever, de forma clara e no imperativo, o que aquele commit faz — não o que você
+fez em geral, mas o efeito daquela alteração específica.
+
+<Callout type="atencao">
+Mensagens de commit como `"ajustes"` ou `"correção"` não ajudam ninguém a entender o histórico do projeto depois.
+Prefira algo específico: `"Corrige cálculo de prazo de SLA para prioridade alta"`.
+</Callout>
+
+## git status e git log: enxergando o que está acontecendo
+
+```bash
+git status   # mostra o que mudou e o que está (ou não) na staging area
+git log      # mostra o histórico de commits
+```
+
+`git status` é o comando mais usado no dia a dia — sempre que tiver dúvida sobre o estado do repositório, rode-o
+antes de qualquer outro comando.
+
+## Um fluxo completo, do início ao fim
+
+```bash
+git init
+echo "print('Olá, mundo!')" > ola.py
+git add ola.py
+git commit -m "Adiciona primeiro script de exemplo"
+git log
+```
+
+## Perguntas frequentes
+
+**Preciso rodar `git add` toda vez antes de `git commit`?**
+Sim — é assim que o Git sabe exatamente o que incluir naquele commit, mesmo que você tenha outras alterações não
+relacionadas na mesma pasta.
+
+**Posso desfazer um commit?**
+Sim, com comandos como `git reset` ou `git revert`, mas isso foge do escopo deste artigo introdutório — vale
+pesquisar com cuidado antes de usar em um projeto compartilhado.
+
+## Resumo
+
+`git init` cria um repositório; `git add` seleciona o que vai para o próximo commit; `git commit` registra essa
+alteração no histórico, com uma mensagem clara. Esses três comandos, junto com `git status` e `git log`, já
+cobrem boa parte do fluxo diário de quem está começando com Git.
